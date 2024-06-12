@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Upcoming Tasks</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/upcommingtasks.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block jquery%}<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+
+<div class="container">
+    <div id="service-section">
+        <h1>Upcoming Tasks</h1>
+    </div>
+    {% if form %}
+    <!-- Selection Form for Airline and Aircraft -->
+    <form class="selection" method="post" action="{% url 'uk_choose_airline_aircraft' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="button-container">
+            <button type="submit">Next</button>
+        </div>
+    </form>
+    {% endif %}
+
+    {% if forms %}
+    <form class="check-due" method="post">
+        {% csrf_token %}
+        {% for field in forms %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+            <span class="helptext">{{ field.help_text }}</span>
+            {% endif %}
+            {% if field.errors %}
+            <div class="field-errors">
+                {{ field.errors.as_text }}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        
+        <div class="button-container">
+            <button type="button" onclick="window.history.back();">Back</button>
+            <button class="due-button" type="submit">Check Tasks</button>
+        </div>
+    </form>
+    {% endif %}
+
+    {% if al_due_tasks or mpd_due_tasks %}
+    <div class="button-group">
+        <button onclick="toggleTable('airline')">Airline Tasks</button>
+        <button onclick="toggleTable('MPD')">MPD Tasks</button>
+    </div>
+
+    {% if al_due_tasks %}
+    <div id="airline" class="hidden">
+        <h2>Upcoming Due Dates - Airline</h2>
+        {% if airline_df %}
+        <div class="airline-table">{{ airline_df | safe }}</div>
+        {% else %}
+        <div class="no-tasks">No due tasks found.</div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if mpd_due_tasks %}
+    <div id="MPD" class="hidden">
+        <h2>Upcoming Due Dates - MPD</h2>
+        {% if MPD_df %}
+        <div class="MPD-table">{{ MPD_df | safe }}</div>
+        {% else %}
+        <div class="no-tasks">No due tasks found.</div>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% endif %}
+
+    <div class="button-container2">
+        <a href="/maintenance/upcomingtasks/" class="ctaa">Another Trial</a>
+        <a href="/documentation/#uc" class="ctaa" target="_blank">User Manual</a>
+    </div>
+</div>
+
+{%include 'parts/footer.html'%}
+{%block script%}<script src="{% static 'js/upcommingtasks.js' %}"></script>{%endblock%}
+{%endblock%}
+

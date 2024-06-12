@@ -1,0 +1,44 @@
+{% load static %}
+{%block stylesheet%}<link href="{% static 'css/header.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block content%}
+  <header>
+    <a href="/" class="logo">
+      <img src="{% static 'images/circular_logo.png' %}" alt="logo" style="height: 50px;"> SkyLinker AirService
+    </a>
+    <ul class="navlist">
+      <li><a href="/" class="nav-item active"><b>Home</b></a></li>
+      <li><a href="/about" class="nav-item"><b>About</b></a></li>
+      <!-- Dropdown for Services -->
+      <li class="dropdown">
+        <a href="/services" class="nav-item dropbtn"><b>Services</b></a>
+        <!-- Dropdown Content -->
+        <div class="dropdown-content">
+          <!-- Airline Operations Topic -->
+          <div class="dropdown-submenu">
+            <a href="/airlineoperations" class="submenu-title"><b>Airline Operations</b></a>
+            <div class="dropdown-submenu-content">
+              <a href="/airlineoperations/itinerarybuilder">Itinerary Builder</a>
+              <a href="/airlineoperations/marketshare">Market Share</a>
+              <a href="/airlineoperations/fleetassignment">Fleet Assignment</a>
+              <a href="/airlineoperations/routing">Aircraft Routing</a>
+            </div>
+          </div>
+          <!-- Maintenance Topic -->
+          <div class="dropdown-submenu">
+            <a href="/maintenance" class="submenu-title"><b>Maintenance</b></a>
+            <div class="dropdown-submenu-content">
+              <a href="/maintenance/operator">Operator</a>
+              <a href="/maintenance/aircraftdata">Aircraft Data</a>
+              <a href="/maintenance/amp">AMP</a>
+              <a href="/maintenance/ldnd">LDND</a>
+              <a href="/maintenance/upcomingtasks">Upcoming Tasks</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><a href="mailto:aemteam24@gmail.com" class="nav-item"><b>Contact Us</b></a></li>
+    </ul>
+    <div class="bx bx-menu" id="menu-icon"></div>
+  </header>
+  {%block script%}<script src="{% static 'js/header.js' %}"></script>{%endblock%}
+{%endblock%}

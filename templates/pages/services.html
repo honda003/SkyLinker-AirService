@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Services</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/services.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+    <div class="service-container">
+        <div id="service-section">
+            <h2>Airlines Operations</h2>
+            <p id="paragraph">Effective airline operations require careful coordination of market analysis,
+                itinerary building, fleet assignment, and aircraft routing to deliver efficient, reliable,
+                and competitive air travel services. Airlines continually refine and optimize these processes
+                to adapt to changing market conditions, technological advancements, and customer preferences.</p>
+            <div class="cards-container">
+                <!-- First Row -->
+                <a href="/airlineoperations/itinerarybuilder" class="card-link">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="{% static 'images/itinerary-builder.jpg' %}" alt="Itinerary Builder">
+                                <div class="title-container">
+                                    <i class="fa-solid fa-route"></i>
+                                    <h3>Itinerary Builder</h3>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Itinerary Builder</h3>
+                                <br>
+                                <p>The itinerary builder is a critical component of airline operations,
+                                    enabling passengers to plan and book their travel seamlessly.
+                                    This involves providing an intuitive interface for customers
+                                    to search for flights, compare fares, select seats, and make reservations.
+                                    Airlines invest in user-friendly booking platforms and mobile apps to
+                                    enhance the customer experience and drive bookings.
+                                    Itinerary builders also integrate with other systems such as fleet management
+                                    and revenue management to ensure accurate scheduling and pricing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="/airlineoperations/marketshare" class="card-link">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="{% static 'images/market.jpg' %}" alt="Another Title">
+                                <div class="title-container">
+                                    <i class="fa-solid fa-shop"></i>
+                                    <h3>Market Share</h3>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Market Share</h3>
+                                <br>
+                                <p>Market share refers to the percentage of total sales or passenger traffic
+                                    that an airline captures within a specific market or industry.
+                                    Airlines compete for market share by offering competitive fares,
+                                    convenient schedules, superior service, and extensive route networks.
+                                    Monitoring market share is crucial for airlines to assess their
+                                    competitive position, identify growth opportunities, and develop
+                                    effective marketing strategies.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!-- Second Row -->
+                <a href="/airlineoperations/fleetassignment" class="card-link">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="{% static 'images/fam.jpg' %}" alt="Third Item">
+                                <div class="title-container">
+                                    <i class="fa-solid fa-plane"></i>
+                                    <h3>Fleet Assignment</h3>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Fleet Assignment</h3>
+                                <br>
+                                <p>Fleet assignment involves determining which aircraft will be assigned
+                                    to specific routes and flights. This decision is based on factors
+                                    such as aircraft size, range, passenger demand, and operational efficiency. Airlines
+                                    must optimize fleet assignment to maximize profitability,
+                                    minimize costs, and meet passenger needs. This involves balancing factors
+                                    such as fuel efficiency, maintenance schedules, and route profitability.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="/airlineoperations/routing" class="card-link">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="{% static 'images/routing.jpg' %}" alt="Fourth Item">
+                                <div class="title-container">
+                                    <i class="fa-solid fa-plane"></i>
+                                    <h3>Aircraft Routing</h3>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Aircraft Routing</h3>
+                                <br>
+                                <p>Aircraft routing refers to the process of planning the flight paths and schedules
+                                    for each aircraft in the fleet. This includes determining the most efficient
+                                    routes between destinations, considering factors such as airspace restrictions,
+                                    weather conditions, and airport congestion. Airlines use sophisticated
+                                    algorithms and software to optimize aircraft routing, aiming to minimize
+                                    fuel consumption, reduce flight times, and maximize resource utilization.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div id="service-section">
+            <h2 style=" margin-top: 50px;">Maintenance Management</h2>
+            <p id="paragraph">Effective maintenance management is essential for ensuring the safety,
+                reliability, and airworthiness of an airline's fleet. By implementing comprehensive
+                maintenance programs, tracking LDND records, and proactively managing upcoming tasks,
+                airlines can minimize the risk of in-flight failures, optimize maintenance operations,
+                and maintain compliance with regulatory requirements.</p>
+            <div class="cards-container">
+                <!-- First Row -->
+                <a href="/maintenance/amp" class="card-link">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="{% static 'images/maintenance4.jpg' %}" alt="Itinerary Builder">
+                                <div class="title-container">
+                                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                                    <h3>AMP</h3>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Aircraft Maintenance Program (AMP)</h3>
+                                <br>
+                                <p>The Aircraft Maintenance Program (AMP) outlines the maintenance tasks
+                                    and intervals required to keep each aircraft in a safe and airworthy
+                                    condition. The AMP is developed based on regulatory requirements,
+                                    manufacturer recommendations, and airline-specific operational
+                                    considerations. It includes scheduled inspections, component
+                                    replacements, and other maintenance activities to prevent failures
+                                    and ensure continued safe operation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="/maintenance/ldnd" class="card-link">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="{% static 'images/maintenance3.jpg' %}" alt="Another Title">
+                                <div class="title-container">
+                                    <i class="fa-solid fa-list-check"></i>
+                                    <h3>LDND</h3>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Last Done, Next Due (LDND)</h3>
+                                <br>
+                                <p> Last Done, Next Due (LDND) is a system used to track the maintenance history
+                                    of aircraft components and schedule future maintenance tasks.
+                                    For each maintenance item, the LDND record indicates when the task was
+                                    last performed and when it is next due based on predefined intervals or
+                                    operating hours. This information helps maintenance planners schedule
+                                    inspections and repairs in a timely manner, minimizing downtime and
+                                    ensuring compliance with regulatory requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!-- Second Row -->
+                <a href="/maintenance/upcomingtasks" class="card-link">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="{% static 'images/maintenance2.jpg' %}" alt="Third Item">
+                                <div class="title-container">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <h3>Upcoming Tasks</h3>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Upcoming Tasks</h3>
+                                <br>
+                                <p>Upcoming tasks refer to maintenance activities that are scheduled to
+                                    be performed on an aircraft in the near future. These tasks include
+                                    routine inspections, scheduled component replacements, and corrective
+                                    maintenance based on findings from previous inspections. Maintenance
+                                    planners use sophisticated software systems to manage upcoming tasks,
+                                    prioritize work orders, allocate resources, and schedule maintenance
+                                    activities to minimize disruptions to flight operations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% comment %} <a href="/services" class="card-link">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="card-front">
+                                <img src="{% static 'images/maintenance.jpg' %}" alt="Fourth Item">
+                                <div class="title-container">
+                                    <i class="fa-brands fa-react"></i>
+                                    <h3>Fourth Item</h3>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Fourth Item</h3>
+                                <br>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit quod autem saepe
+                                    ratione assumenda, quas maiores dolore error architecto tempora natus praesentium
+                                    provident, aut magnam ea excepturi esse non exercitationem!</p>
+                            </div>
+                        </div>
+                    </div>
+                </a> {% endcomment %}
+            </div>
+        </div>
+    </div>
+    <br>
+{% include 'parts/footer.html' %}
+{% endblock %}

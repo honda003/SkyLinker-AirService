@@ -1,0 +1,190 @@
+:root {
+  --primary-color: rgb(255, 234, 0);
+  --secondary-color: rgba(255, 255, 255, .4)
+}
+
+.service-container {
+  margin-top: 100px;
+}
+
+#service-section {
+  min-height: 740px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+}
+
+#service-section h2 {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 20px;
+
+  position: relative;
+}
+
+#service-section h2:after {
+  position: absolute;
+  content: " ";
+  top: 8px;
+  left: -30px;
+  height: 0;
+  width: 0;
+  border-top: 20px solid transparent;
+  border-left: 20px solid var(--primary-color);
+}
+
+#service-section h2:before {
+  position: absolute;
+  content: " ";
+  top: 8px;
+  right: -30px;
+  height: 0;
+  width: 0;
+  border-top: 20px solid transparent;
+  border-right: 20px solid var(--primary-color);
+}
+
+#service-section #paragraph {
+  width: 45%;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, .7);
+  text-align: center;
+  line-height: 1.5rem;
+  white-space: 1px;
+  margin-bottom: 40px;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  width: 80%;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: calc(50% - 20px);
+  /* Adjust card width to fit 2 per row, accounting for gap */
+}
+
+.card-container {
+  perspective: 1000px;
+  height: 400px;
+  /* Adjust based on your needs */
+  margin-bottom: 20px;
+  /* Space between rows */
+  border-radius: 15px;
+  /* Optional: Adds rounded corners to the card */
+  overflow: hidden;
+  /* Ensures the card's content respects the border-radius */
+}
+
+/* Existing .card, .card-front, .card-back styles remain unchanged */
+
+
+.card {
+  width: 100%;
+  height: 100%;
+  transition: transform 1.2s;
+  transform-style: preserve-3d;
+  border-radius: 15px;
+  /* Adjust this value to control the roundness of the corners */
+
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 15px;
+  /* Ensure consistency in border radius */
+}
+
+
+.card-front {
+  z-index: 2;
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  -webkit-filter: blur(1.5px);
+  /* Chrome, Safari, Opera */
+  filter: blur(1.5px);
+  /* Apply border-radius to the image as well */
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  /* Centers the icon vertically with the text */
+  justify-content: center;
+  /* Optional: Centers the content horizontally */
+  position: absolute;
+  /* Adjust based on your design */
+  width: 100%;
+}
+
+.title-container h3 {
+  margin-left: 10px;
+  align-items: center;
+  justify-content: center;
+  /* Creates some space between the icon and the title */
+  color: #fff;
+  /* Adjust based on your design */
+  font-weight: 900;
+  font-size: 40px;
+}
+
+.card-front i {
+  color: #fff;
+  /* React icon color, adjust as needed */
+  font-size: 30px;
+}
+
+.card-back {
+  background-color: rgba(8, 24, 68, 1);
+  color: #fff;
+  transform: rotateY(180deg);
+  padding: 20px;
+}
+
+.card-container:hover .card {
+  transform: rotateY(180deg);
+}
+
+
+@media (max-width: 768px) {
+  #service-section h2{
+    font-size: 23px;
+  }
+  .cards-container{
+    width: 80%; /* Use full container width */
+  }
+
+  .card-link {
+    width: 100%; /* Each card takes full width, displaying in a single column */
+    margin: 0 auto; /* Optional: Adjusts margin for better alignment */
+    max-width: 600px; /* Optional: Limits the maximum width of the cards for larger screens */
+  }
+
+  .title-container h3{
+    font-size: 28px;
+  }
+
+  /* Adjust other styles as needed for smaller screens */
+}

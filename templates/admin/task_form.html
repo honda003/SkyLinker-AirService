@@ -1,0 +1,51 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block extrastyle %}
+<style>
+    .nav-buttons {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-left:10px;
+    }
+    .nav-buttons a {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+    .nav-buttons a:hover {
+        background-color: #0056b3;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="nav-buttons">
+    <a href="{% url 'admin:index' %}" style="color:white">Home</a>
+    <a href="{% url 'admin:LDND_lastdone_changelist' %}" style="color:white">Last Done Next Due Data</a>
+</div>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Add Last Done by Task</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Add Last Done by Task</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

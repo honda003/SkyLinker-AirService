@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Aircraft Routing</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/routing.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block jquery%}<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+
+<div class="container">
+    <div id="service-section">
+        <h1>Aircraft Routing</h1>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if error_message %}
+        <div class="alert alert-danger">
+            {{ error_message }}
+        </div>
+    {% endif %}
+    {% if infeasibility_result %}
+            <h3>Infeasibility Report.</h3>
+            <!-- Example of displaying infeasibility_result if it's a list or dict -->
+            <pre>{{ infeasibility_result | safe }}</pre>
+            <!-- You might need to adjust the display method based on the structure of infeasibility_result -->
+        {% endif %}
+    {% if error_messages %}
+        <div class="alert alert-danger">
+            {% for error in error_messages %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if excel_form %}
+        <form class="excel" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ excel_form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+
+        <div class="sample">
+            <p>Please ensure all the columns in the Excel file are correctly filled as per the sample format below.</p>
+            <button class="sample-button" id="previewButton" type="button">Sample</button>
+            <div style="display: none;" id="sampleContainer">
+                <h2>Sample Flight Data</h2>
+                <div class="data-schedule" id="sampleFlightData">
+                    <!-- Table will be loaded here via AJAX -->
+                </div>
+                <!-- Initially hide the download link; it will be shown after AJAX success -->
+                <a href="{% url 'download_R_flights_sample_excel' %}" class="button-link" style="display: none;" id="downloadLink">
+                    <button class="sample-button">Download</button>
+                </a>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                // Flag to check if data has been loaded
+                var dataLoaded = false;
+            
+                $("#previewButton").click(function() {
+                    // Check if data is already loaded
+                    if (!dataLoaded) {
+                        // Perform AJAX request to fetch data
+                        $.ajax({
+                            url: '{% url "preview_R_flights_sample" %}',
+                            type: 'get',
+                            success: function(response) {
+                                // Display the fetched HTML table in the div
+                                $('#sampleFlightData').html(response.html_table);
+                                // Data has been successfully loaded
+                                dataLoaded = true;
+                                // Show the download link
+                                $('#downloadLink').show();
+                                // Show the sample data container with a fade in animation
+                                $("#sampleContainer").fadeIn("slow");
+                            },
+                            error: function() {
+                                // Display an error message if the data fetch fails
+                                $('#sampleFlightData').html('<p>No data available to display.</p>');
+                                // Data loading attempt failed, can try again
+                                dataLoaded = false;
+                                // Ensure the download link remains hidden if there's an error
+                                $('#downloadLink').hide();
+                                // Show the error message with a fade in animation
+                                $("#sampleContainer").fadeIn("slow");
+                            }
+                        });
+                    } else {
+                        // Toggle the visibility of the sample container with a fade animation
+                        $("#sampleContainer").fadeToggle("slow");
+                    }
+                });
+            });
+        </script>
+
+    {% elif column_form %}
+        <h2>Missing Columns.</h2>
+        <form class="missing" method="post">
+            {% csrf_token %}
+            {{ column_form.as_p }}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+        </form>
+    {% elif fpd_form %}
+        <h2>Flights Per Day Decision.</h2>
+        <p1>Maximum allowable flights per day: {{ max_fpd }}</p1>
+        <form class="fpd {%if fpd_form.errors%}fpd_errors{%endif%}" method="post">
+            {% csrf_token %}
+            {{ fpd_form.as_p }}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+        </form>
+    {% elif cycle_and_aircraft_form %}
+    <h2>Enter Cycle and Fleet Information.</h2>
+    <form class="fleet" method="post">
+        {% csrf_token %}
+        {{ cycle_and_aircraft_form.as_p }}
+        <div class="button-container">
+            <button type="button" onclick="window.history.back();">Back</button>
+            <button type="submit">Optimize</button>
+        </div>
+    </form>
+    {% elif turn_around_form and hub_selection_form %}
+        <h2>Turn Around Time and Hub Selection.</h2>
+        <form class="hub {%if hub_selection_form.hubs.errors%}hub_errors{%endif%}" method="post">
+            {% csrf_token %}
+            {{ turn_around_form.as_p }}
+            {{ hub_selection_form.as_p }}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+        </form>
+    {% endif %}
+    {% if optimized_schedule_html %}
+        <h2>Optimization Results.</h2>
+        <p2>Objective Value: {{ objective_value }} Stops.</p2>
+        <div class="schedule-table">
+            {{ optimized_schedule_html | safe }}
+        </div>
+        {% if routing_result %}
+            <h3>Routing Report.</h3>
+            <!-- Example of displaying routing_result if it's a list or dict -->
+            <pre>{{ routing_result | safe }}</pre>
+            <!-- You might need to adjust the display method based on the structure of routing_result -->
+
+            {% if excel_file_url %}
+                <a href="{% url 'download_R_results_excel' %}" class="button-link">
+                    <button class="download-report">Download Excel Results</button>
+                </a>
+            {% endif %}
+
+        {% endif %}
+    {% endif %}
+    
+    <div class="button-container2">
+        <a href="/airlineoperations/routing" class="ctaa">Another Trial</a>
+        <a href="/documentation/#routing" class="ctaa" target="_blank">User Manual</a>
+    </div>
+</div>
+{%include 'parts/footer.html'%}
+{%block script%}<script src="{% static 'js/routing.js' %}"></script>{%endblock%}
+{%endblock%}

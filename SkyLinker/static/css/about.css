@@ -1,0 +1,295 @@
+/* About Start */
+
+.about-content {
+  width: 100%;
+  height: 100vh;
+  background-color: linear-gradient(86.3deg, rgba(0, 119, 182, 1) 3.6%, rgba(8, 24, 68, 1) 87.6%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 35px;
+}
+
+.about-content img {
+  height: auto;
+  width: 550px;
+  max-width: 100%;
+  border-radius: 10%;
+  padding-right: 10px;
+}
+
+.about-text {
+  width: 550px;
+  max-width: 100%;
+  padding: 0 10px;
+}
+
+.about-text h2 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 5px;
+  text-transform: capitalize;
+}
+
+.about-text h3 {
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+}
+
+.about-text p {
+  color: #c0c4d6;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .about-content {
+    margin-top: 100px;
+    flex-direction: column;
+    margin-top: 130px;
+    /* Stack vertically on smaller screens */
+  }
+
+
+  .about-text {
+    padding: 15px;
+  }
+
+  .about-img {
+    order: 2; /* Ensure the image is placed below the text */
+    max-width: 95%;
+  }
+
+  .about-text {
+    order: 1; /* Ensure the text is placed above the image */
+  }
+
+  .about-text h2 {
+    font-size: 30px;
+    /* Adjust font size */
+  }
+
+  .about-text h5,
+  .about-text p {
+    font-size: 14px;
+    /* Adjust font size for readability */
+  }
+
+  .about-text {
+    padding: 15px;
+  }
+}
+
+/* About ends */
+
+/* Meet the team Start */
+:root {
+  --primary-color: rgb(255, 234, 0);
+  --secondary-color: rgba(255, 255, 255, .4)
+}
+
+#meettheteam-section {
+  min-height: 800px;
+  width: 100%;
+  display: flex;
+  padding-bottom: 50px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+}
+
+#meettheteam-section h2 {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+#meettheteam-section h2:after {
+  position: absolute;
+  content: " ";
+  top: 8px;
+  left: -30px;
+  height: 0;
+  width: 0;
+  border-top: 20px solid transparent;
+  border-left: 20px solid var(--primary-color);
+}
+
+#meettheteam-section h2:before {
+  position: absolute;
+  content: " ";
+  top: 8px;
+  right: -30px;
+  height: 0;
+  width: 0;
+  border-top: 20px solid transparent;
+  border-right: 20px solid var(--primary-color);
+}
+
+#meettheteam-section #paragraph {
+  width: 45%;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, .7);
+  text-align: center;
+  line-height: 1.5rem;
+  white-space: 1px;
+  margin-bottom: 40px;
+}
+
+.meet-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  z-index: 2;
+  margin-top: 20px;
+
+}
+
+
+.meet-cards .meet-card {
+  height: 450 px;
+  width: 450px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  background: rgba(8, 24, 68, 1);
+  position: relative;
+  border-radius: 10px;
+}
+
+.meet-cards .meet-card::before {
+  position: absolute;
+  content: " ";
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  background-color: rgb(255, 234, 0);
+  transition: .6s;
+  transform: rotate(0deg);
+  z-index: -1;
+}
+
+.meet-cards .meet-card:hover.meet-card::before {
+  transform: rotate(10deg);
+}
+
+.meet-cards .meet-card i {
+  font-size: 2rem;
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.meet-card .meet-card-content h3 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.meet-cards .meet-card .meet-card-content p {
+  color: #fff;
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+  font-weight: 560px;
+}
+
+.meet-cards .meet-card:nth-child(5) {
+  grid-column: 1 / -1;
+  /* Makes it span across all columns in the grid */
+  justify-self: center;
+  /* Centers it within the grid */
+  max-width: calc(50% - (25px / 2));
+  /* Adjust width to match the other cards, taking the gap into account */
+}
+
+.meet-card .img-container {
+  width: 10em;
+  height: 10em;
+  background-color: rgba(0, 119, 182, 1);
+  padding: 0.5em;
+  border-radius: 50%;
+  margin: 20px auto 2em auto;
+}
+
+.meet-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the entire container while maintaining aspect ratio */
+  border-radius: 50%;
+}
+
+.meet-card h3 {
+  font-weight: 500;
+  text-align: center;
+}
+
+.meet-card p {
+  font-weight: 300;
+  text-align: center;
+  margin: 0.5em 0 2em 0;
+  letter-spacing: 2px;
+}
+
+.icons {
+  width: 50%;
+  min-width: 180px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.meet-card a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.4em;
+}
+
+.meet-card:hover .img-container {
+  transform: scale(1.15);
+}
+
+@media(max-width:1100px) {
+  #meettheteam-section h2 {
+    margin-top: 80px;
+  }
+
+  .meet-cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .meet-cards .meet-card:nth-child(5) {
+    grid-column: 1 / -1;
+    /* Makes it span across all columns in the grid */
+    justify-self: center;
+    /* Centers it within the grid */
+    max-width: 100%;
+    /* Adjust width to match the other cards, taking the gap into account */
+  }
+
+  #sermeettheteam-section #paragraph {
+    width: 80%;
+  }
+}
+
+@media(max-width:900px) {
+  .meet-cards .meet-card {
+    height: 400px;
+    width: 400px;
+    margin: 20px 0;
+  }
+}
+
+/* Meet the team end */

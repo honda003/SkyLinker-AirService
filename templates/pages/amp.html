@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Aircraft Maintenance Program</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/amp.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+<div id="service-section">
+    <h1>Aircraft Maintenance Program</h1>
+</div>
+<div class="container">
+<form method="get" action="">
+    <div>
+        <input type="text" name="q" placeholder="Search MPD or Task Card Number" value="{{ request.GET.q }}">
+
+        <select name="package">
+            <option value="">All Packages</option>
+            {% for package in package_options %}
+                <option value="{{ package }}" {% if request.GET.package == package %}selected{% endif %}>{{ package }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="airline">
+            <option value="">Airline Name</option>
+            {% for airline in airline_names %}
+                <option value="{{ airline }}" {% if request.GET.airline == airline %}selected{% endif %}>{{ airline }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="aircraft">
+            <option value="">Aircraft Name</option>
+            {% for aircraft in aircraft_names %}
+                <option value="{{ aircraft }}" {% if request.GET.aircraft == aircraft %}selected{% endif %}>{{ aircraft }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="check">
+            <option value="">All Checks</option>
+            {% for check in check_options %}
+                <option value="{{ check }}" {% if request.GET.check == check %}selected{% endif %}>{{ check }}</option>
+            {% endfor %}
+        </select>
+
+        {% for key in dynamic_applicability_keys %}
+        <select name="{{ key }}">
+            <option value="">Filter by {{ key|cut:"applicable_for_"|title }}</option>
+            <option value="Y" {% if dynamic_filters.key == 'Y' %}selected{% endif %}>Yes</option>
+            <option value="N" {% if dynamic_filters.key == 'N' %}selected{% endif %}>No</option>
+        </select>
+        {% endfor %}
+    </div>
+    <button type="submit">Apply Filters</button>
+</form>
+
+<h2>Show/Hide:</h2>
+
+<div class="check-div">
+    <input type="checkbox" id="airline-name" onclick="toggleColumn(0, this.checked)" checked>
+    <label for="airline-name">Airline Name</label>
+    <input type="checkbox" id="aircraft-name" onclick="toggleColumn(1, this.checked)" checked>
+    <label for="aircraft-name">Aircraft Name</label>
+    <input type="checkbox" id="mpd-number" onclick="toggleColumn(2, this.checked)" checked>
+    <label for="mpd-number">MPD Number</label>
+    <input type="checkbox" id="task-card-number" onclick="toggleColumn(3, this.checked) " checked>
+    <label for="task-card-number">TASK CARD NUMBER</label>
+    <input type="checkbox" id="thres" onclick="toggleColumn(4, this.checked)" checked>
+    <label for="thres">THRES</label>
+    <input type="checkbox" id="repeat" onclick="toggleColumn(5, this.checked)" checked>
+    <label for="repeat">REPEAT</label>
+    <input type="checkbox" id="zone" onclick="toggleColumn(6, this.checked)" checked>
+    <label for="zone">Zone</label>
+    <input type="checkbox" id="access" onclick="toggleColumn(7, this.checked)" checked>
+    <label for="access">Access</label>
+    <input type="checkbox" id="apl" onclick="toggleColumn(8, this.checked)" checked>
+    <label for="apl">APL</label>
+    <input type="checkbox" id="eng" onclick="toggleColumn(9, this.checked)" checked>
+    <label for="eng">ENG</label>
+    <input type="checkbox" id="access-hours" onclick="toggleColumn(10, this.checked)" checked>
+    <label for="access-hours">ACCESS HOURS</label>
+    <input type="checkbox" id="man-hours" onclick="toggleColumn(11, this.checked)" checked>
+    <label for="man-hours">MAN HOURS</label>
+    <input type="checkbox" id="total-hours" onclick="toggleColumn(12, this.checked)" checked>
+    <label for="total-hours">TOTAL HOURS</label>
+    <input type="checkbox" id="task-description" onclick="toggleColumn(13, this.checked)" checked>
+    <label for="task-description">TASK DESCRIPTION</label>
+    <input type="checkbox" id="task-type" onclick="toggleColumn(14, this.checked)" checked>
+    <label for="task-type">TASK TYPE</label>
+    <input type="checkbox" id="task-title" onclick="toggleColumn(15, this.checked)" checked>
+    <label for="task-title">TASK TITLE</label>
+    <input type="checkbox" id="PROGRAM" onclick="toggleColumn(16, this.checked)" checked>
+    <label for="PROGRAM">PROGRAM</label>
+    <input type="checkbox" id="area" onclick="toggleColumn(17, this.checked)" checked>
+    <label for="area">AREA</label>
+    <input type="checkbox" id="package" onclick="toggleColumn(18, this.checked)" checked>
+    <label for="package">PACKAGE</label>
+    <input type="checkbox" id="remarks" onclick="toggleColumn(19, this.checked)" checked>
+    <label for="remarks">REMARKS</label>
+    <input type="checkbox" id="check" onclick="toggleColumn(20, this.checked)" checked>
+    <label for="check">CHECK</label>
+    <input type="checkbox" id="dynamic-applicability" onclick="toggleColumn(21, this.checked)" checked>
+    <label for="dynamic-applicability">DYNAMIC APPLICABILITY</label>
+</div>
+
+<table id="data-table">
+    <tr>
+        {% for column, name in columns.items %}
+        <th>
+            <div class="grid-container">
+                <i class="fa-solid fa-sort sort-toggle" data-column="{{ column }}"></i>
+                <span>{{ name }}</span>
+            </div>
+        </th>
+        {% endfor %}
+    </tr>
+    {% for item in page_obj %}
+    <tr>
+        <td>{{ item.Airline_Name }}</td>
+        <td>
+            {% for aircraft in item.Aircraft_Name.all %}
+                {{ aircraft.aircraft_name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </td>
+        <td>{{ item.MPD_ITEM_NUMBER }}</td>
+        <td>{{ item.TASK_CARD_NUMBER }}</td>
+        <td>{{ item.THRES }}</td>
+        <td>{{ item.REPEAT }}</td>
+        <td>{{ item.ZONE }}</td>
+        <td>{{ item.ACCESS }}</td>
+        <td>{{ item.APL }}</td>
+        <td>{{ item.ENG }}</td>
+        <td>{{ item.ACCESS_HOURS }}</td>
+        <td>{{ item.MAN_HOURS }}</td>
+        <td>{{ item.TOTAL_HOURS }}</td>
+        <td>{{ item.TASK_DESCREPTION }}</td>
+        <td>{{ item.TASK_TYPE }}</td>
+        <td>{{ item.TASK_TITLE }}</td>
+        <td>{{ item.PROGRAM }}</td>
+        <td>{{ item.AREA }}</td>
+        <td>{{ item.PACKAGE }}</td>
+        <td>{{ item.REMARKS }}</td>
+        <td>{{ item.CHECK }}</td>
+        <td>{{ item.dynamic_applicability }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="100%">No Research Results</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- Pagination Controls -->
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?{{ base_query_string }}&page=1">First</a>
+        <a href="?{{ base_query_string }}&page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+        <a href="?{{ base_query_string }}&page={{ page_obj.next_page_number }}">Next</a>
+        <a href="?{{ base_query_string }}&page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+</div>
+{%include 'parts/footer.html'%}
+{%block script%}<script src="{% static 'js/amp.js' %}"></script>{%endblock%}
+{%endblock%}

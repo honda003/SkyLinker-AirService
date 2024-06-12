@@ -1,0 +1,557 @@
+#service-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+}
+
+#service-section h1 {
+    margin-top: 100px;
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    position: relative;
+    align-items: center;
+}
+
+#service-section h1:after {
+    position: absolute;
+    content: " ";
+    top: 8px;
+    left: -30px;
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-left: 20px solid rgb(255, 234, 0);
+}
+
+#service-section h1:before {
+    position: absolute;
+    content: " ";
+    top: 8px;
+    right: -30px;
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-right: 20px solid rgb(255, 234, 0);
+}
+
+#service-section p {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    /* Stack children vertically */
+    align-items: center;
+    /* Center children horizontally */
+    justify-content: center;
+    /* Center children vertically if needed */
+}
+
+form {
+    width: 80%;
+    max-width: 40rem;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    margin: 30px 0px;
+}
+
+form label{
+    font-weight: bold;
+}
+
+form button {
+    background-color: rgb(55, 116, 190);
+    color: white;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 80px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+form .button-container {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    width: 100%;
+    gap: 50px;
+    margin-top: 30px;
+}
+
+form button:hover {
+    background-color: rgb(18, 158, 44);
+}
+
+.container h2 {
+    font-weight: normal;
+    font-size: 17.5px;
+    color: white;
+    text-align: center;
+}
+
+
+
+
+.excel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.excel input,
+label {
+    color: white;
+}
+
+.excel input {
+    width: 200px;
+}
+
+.excel button{
+    height: 30px;
+}
+
+
+
+.sample {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.sample p{
+    color: white;
+}
+
+.sample-button {
+    background-color: rgb(55, 116, 190);
+    color: white;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 75px;
+    height: 35px;
+    margin-bottom: 20px;
+}
+
+.sample-button:hover {
+    background-color: rgb(18, 158, 44);
+}
+
+
+.missing p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.missing{
+    max-width: 80%;
+}
+
+.missing label{
+    font-size: 15px;
+    max-width: 150px;
+}
+
+.missing input{
+    width: 80px;
+}
+
+.missing span{
+    max-width: 500px ;
+    color: white;
+}
+
+
+
+
+.fleet-number {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 40%;
+}
+
+.fleet-number input{
+    width: 50px;
+}
+
+.fleet-number span{
+    color: white;
+}
+.fleet-number button{
+    margin-left: 5px;
+    height: 30px;
+    width: 70px;
+}
+
+
+.Back-Button {
+    background-color: rgb(55, 116, 190);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 70px;
+    height: 35px;
+    margin-bottom: 20px;
+
+}
+
+.Back-Button:hover {
+    background-color: rgb(18, 158, 44);
+}
+
+
+.fleet-data{
+    max-width: 40%;
+}
+
+.fleet-data-h2{
+    margin-top: 50px;
+}
+
+
+.fleet-data p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.fleet-data label{
+    font-size: 15px;
+}
+
+.fleet-data input{
+    width: 80px;
+}
+
+.fleet-data span{
+    max-width: 500px ;
+    color: white;
+}
+
+.fleet-data-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Adjust the margin as needed */
+}
+
+
+/* .form-group{
+    position: relative;
+} */
+
+.fa-circle-info{
+    position: relative;
+    color: white;
+    cursor: pointer;
+}
+
+.fa-circle-info:hover{
+    color: black;
+}
+
+.help-text {
+    position: absolute; 
+    background-color: rgba(8, 24, 68, 0.9);
+    color: white;
+    padding: 10px;
+    z-index: 1000;
+    display: none; 
+    width:500px;
+    word-wrap: break-word; 
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5); 
+}
+
+
+
+
+
+.demand-related .form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.demand-related{
+    max-width: 40%;
+}
+
+.demand-related label{
+    font-size: 15px;
+}
+
+.demand-related input{
+    width: 80px;
+}
+
+.fleet-data-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Adjust the margin as needed */
+}
+
+
+.recapture-ratio .form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.recapture-ratio{
+    max-width: 30%;
+}
+
+.recapture-ratio label{
+    font-size: 15px;
+}
+
+.recapture-ratio input{
+    width: 80px;
+}
+
+
+.fpd p{
+    margin-top: 20px;
+}
+
+
+
+
+/* .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+} */
+
+
+p2,h3,pre{
+    color: white;
+    margin-top: 20px;
+}
+
+p2{
+    font-weight: bold;
+}
+
+.alert{
+    color: rgb(255, 56, 56);
+    font-weight: bold;
+}
+
+table {
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-spacing: 3px;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    box-shadow: 0 5px 12px rgba(32, 32, 32, 0.3);
+    width: auto;
+    height: auto;
+    background: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+th,
+td {
+    padding: 12px 12px;
+}
+
+th {
+    background: rgb(55, 116, 190);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 13.5px;
+    font-family: 'Roboto', sans-serif;
+    white-space: nowrap;
+    text-align: center;
+
+}
+
+td {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(203, 224, 248);
+}
+
+tr:hover {
+    background: rgba(137, 190, 250, 0.849);
+}
+
+
+.decision-variable{
+    margin-top: 70px;
+}
+
+.download-report{
+    background-color: rgb(55, 116, 190);
+    color: white;
+    margin-top: 50px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100px;
+    height: 45px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    font-size: 9.5px;
+}
+
+.download-report:hover{
+    background: rgb(18, 158, 44);
+}
+  
+.container a.ctaa {
+    color: white;
+    background: rgba(8, 24, 68, 0.829);
+    border: 1px solid transparent;
+    padding: 12px 30px;
+    line-height: 1.4;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 30px;
+    text-transform: uppercase;
+    transition: all .55s ease;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container a.ctaa:hover {
+    background: transparent;
+    border: 1px solid white;
+    transform: translateX(8px);
+}
+
+.button-container2{
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    width: 100%;
+    gap: 50px;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+
+.fleet-header h3{
+    font-size: 15px;
+}
+
+.fleet-details{
+    margin-top: 20px;
+    margin-bottom: 30px; 
+}
+
+.fa-angle-down, .fa-angle-up {
+    cursor: pointer;
+}
+
+
+.button-container{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .fleet-number, .fleet-data, .demand-related {
+        max-width: 90%;
+    }
+
+    .fleet-data label, .fleet-number label {
+        font-size: 13.5px;
+    }
+
+    .fleet-data h3 {
+        font-size: 13.5px;
+    }
+
+    .help-text {
+        width: 140px;
+    }
+
+    .schedule-table {
+        width: 90%;
+        display: block;
+        overflow-x: auto;
+    }
+
+    .schedule-table::-webkit-scrollbar {
+        height: 5.5px;  /* Height of the horizontal scrollbar */
+    }
+
+    .data-schedule{
+        width: 90%;
+        display: block;
+        overflow-x: auto;
+    }
+
+    .data-schedule::-webkit-scrollbar {
+        height: 5.5px;  /* Height of the horizontal scrollbar */
+    }
+
+
+    
+}

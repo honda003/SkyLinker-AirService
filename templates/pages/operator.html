@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Operator</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/operator.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block jquery%}<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+<div id="service-section">
+    <h1 class="title">Welcome to the Operator Page</h1>
+</div>
+    {% if not form_submitted %}
+    <div class="form-control" {%if form.as_p.errors or aircrafts_form.as_p.errors%}errors{%endif%}>
+        <form method="post" class="form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-group">
+                {{ aircrafts_form.num_aircrafts.label_tag }}
+                {{ aircrafts_form.num_aircrafts }}
+                {{ aircrafts_form.num_aircrafts.errors }}
+            </div>
+            <div id="production-dates"></div>
+            <button type="submit">Submit</button>
+        </form>
+        
+    </div>
+    {% else %}
+    <div class="table-container">
+    <!-- Display L_intervals in a table -->
+        <table>
+            <caption>L Intervals</caption>
+            <tr>
+                <th>Package</th>
+                <th>FC Interval</th>
+                <th>FH Interval</th>
+                <th>DY Interval</th>
+            </tr>
+            {% for L, intervals in L_intervals.items %}
+            <tr>
+                <td>{{ L }}</td>
+                <td>{{ intervals.FC_Interval.lower_bound }} - {{ intervals.FC_Interval.upper_bound }}</td>
+                <td>{{ intervals.FH_Interval.lower_bound }} - {{ intervals.FH_Interval.upper_bound }}</td>
+                <td>{{ intervals.DY_Interval.lower_bound }} - {{ intervals.DY_Interval.upper_bound }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <!-- Display C_intervals in a table -->
+        <table>
+            <caption>C Intervals</caption>
+            <tr>
+                <th>Package</th>
+                <th>FC Interval</th>
+                <th>FH Interval</th>
+                <th>YR Interval</th>
+            </tr>
+            {% for C, intervals in C_intervals.items %}
+            <tr>
+                <td>{{ C }}</td>
+                <td>{{ intervals.FC_Interval.lower_bound }} - {{ intervals.FC_Interval.upper_bound }}</td>
+                <td>{{ intervals.FH_Interval.lower_bound }} - {{ intervals.FH_Interval.upper_bound }}</td>
+                <td>{{ intervals.YR_Interval.lower_bound }} - {{ intervals.YR_Interval.upper_bound }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+</div>
+
+<div class="button-container2">
+    <a href="/maintenance/operator" class="ctaa">Another Trial</a>
+    <a href="/documentation/#operator" class="ctaa">User Manual</a>
+</div>
+
+{% include 'parts/footer.html'%}
+{%block script%}<script src="{% static 'js/operators.js' %}"></script>{%endblock%}
+{%endblock%}
+

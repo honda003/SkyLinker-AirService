@@ -1,0 +1,22 @@
+{% extends "admin/change_list.html" %}
+{% load i18n static %}
+
+
+{% block object-tools-items %}
+<li>
+    <a href="{% url 'admin:LDND_lastdone_add_task' %}" class="addlink">
+        {% trans "Add Last Done by Task" %}
+    </a>
+</li>
+<li>
+    <a href="{% url 'admin:LDND_lastdone_add_package' %}" class="addlink">
+        {% trans "Add Last Done by Package" %}
+    </a>
+</li>
+<li>
+    <a href="{% url 'admin:LDND_lastdone_upload' %}" class="addlink">
+        {% trans "Upload Excel" %}
+    </a>
+</li>
+{{ block.super }}
+{% endblock %}

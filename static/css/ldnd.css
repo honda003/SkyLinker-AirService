@@ -1,0 +1,530 @@
+.side-sticker {
+    position: fixed;
+    left: -250px; /* Start off-screen */
+    top: 0;
+    width: 250px;
+    height: 100%;
+    transition: left 0.3s;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    transition: left 0.3s;
+    z-index: 1000;
+    background-image: linear-gradient(86.3deg, rgba(0, 119, 182, 1) 3.6%, rgba(8, 24, 68, 1) 87.6%) ;
+    overflow-y: auto;
+}
+
+.side-sticker::-webkit-scrollbar {
+    width: 5px;  /* Makes the scrollbar thin */
+}
+
+.side-sticker::-webkit-scrollbar-track {
+    background-color: #f1f1f1;  /* Light grey track */
+}
+
+.side-sticker::-webkit-scrollbar-thumb {
+    background-color: rgb(0 0 0/75%);;  /* Dark grey scroll thumb */
+}
+
+.side-sticker::-webkit-scrollbar-thumb:hover {
+    background-color: #555;  /* Darker grey scroll thumb on hover */
+}
+
+.side-sticker.active {
+    left: 0; /* Slide in */
+}
+
+.sticker-content {
+    padding: 15px;
+}
+
+.x-button {
+    border: none;
+    background: none;
+    font-size: 12px;
+    cursor: pointer;
+    color: white;
+}
+
+.toggle-button {
+    display: block;
+    margin: 0 auto;
+    transition: left 0.3s; 
+    background-color: rgb(55, 116, 190);
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    height: 40px;
+    z-index: 1;
+}
+
+.toggle-button:hover {
+
+    background-color:rgb(18, 158, 44)
+
+}
+
+
+
+
+.package-update-section h2{
+    margin-top: 10px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 17.5px;
+}
+
+.package-update-section p{
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+
+#service-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+}
+
+#service-section h1 {
+    margin-top: 100px;
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    position: relative;
+    align-items: center;
+}
+
+#service-section h1:after {
+    position: absolute;
+    content: " ";
+    top: 8px;
+    left: -30px;
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-left: 20px solid rgb(255, 234, 0);
+}
+
+#service-section h1:before {
+    position: absolute;
+    content: " ";
+    top: 8px;
+    right: -30px;
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-right: 20px solid rgb(255, 234, 0);
+}
+
+#service-section p {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.selection, .due-clearance {
+    width: 80%;
+    max-width: 40rem;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    margin-top: 20px;
+}
+
+.selection label, .due-clearance label {
+    font-weight: bold;
+    color: white;
+}
+
+.selection button, .due-clearance button {
+    background-color: rgb(55, 116, 190);
+    color: white;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 80px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.selection .button-container, .due-clearance .button-container {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    width: 100%;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.selection button:hover, .due-clearance button:hover {
+    background-color: rgb(18, 158, 44);
+}
+
+.selection p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.selection{
+    max-width: 30%;
+    margin-bottom: 50px;
+}
+
+.selection label{
+    font-size: 15px;
+    max-width: 150px;
+}
+
+.selection input{
+    width: 100px;
+}
+
+
+.selection span{
+    max-width: 500px ;
+    color: white;
+}
+
+.selection select{
+    width: 100px;
+}
+
+
+
+.due-clearance {
+    max-width: 40%;
+    margin: 0 auto;
+    padding: 20px;
+    color: #fff;
+    border-radius: 8px;
+    margin-bottom: 50px;
+}
+
+.container h2{
+    color: white;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.due-clearance .form-group {
+    margin-bottom: 20px;
+}
+
+.due-clearance label {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.due-clearance input,
+.due-clearance select {
+    width: 235px;
+    padding: 5px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.ldnd{
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.package-update-section form{
+    margin-left: 0;
+}
+
+.ldnd input,
+.ldnd select{
+    width: 225px;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #ffffff;
+    color: rgb(117, 117, 117);
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.ldnd option {
+    color: white;
+    background-color: rgba(8, 24, 68, 1);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2)
+}
+
+.ldnd option:hover {
+    background-color: rgba(0, 119, 182, 1);
+}
+
+
+.ldnd button {
+    background-color: rgb(55, 116, 190);
+    color: white;
+    margin-top: 20px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+
+
+.ldnd button:hover {
+    background-color: rgb(18, 158, 44);
+}
+
+
+h3{
+    color: #fff;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    font-size: 15px;
+    margin-top: 30px;
+}
+
+
+.check-div {
+    color: #fff;
+    display: grid;
+    /* Use grid layout */
+    grid-template-columns: repeat(4, 1fr);
+    /* Create six columns */
+    grid-template-rows: auto auto;
+    /* Two rows, height determined by content */
+    gap: 20px;
+    /* Space between grid items */
+    text-align: center;
+    /* Center the text within each cell */
+}
+
+.check-div input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    position: absolute;
+    opacity: 0;
+}
+
+.check-div label {
+    margin-left: 20px;
+    margin-right: 20px;
+    position: relative;
+    display: inline-block;
+    line-height: 20px;
+}
+
+.check-div label::before {
+    cursor: pointer;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 2px solid grey;
+    border-radius: 4px;
+}
+
+.check-div input[type="checkbox"]:checked+label::before {
+    background-color: rgb(18, 158, 44);
+    border-color: rgb(18, 158, 44);
+}
+
+.check-div input[type="checkbox"]:checked+label::after {
+    cursor: pointer;
+    content: '✔';
+    position: absolute;
+    margin-top: 3px;
+    left: 4px;
+    top: -2px;
+    color: white;
+    font-size: 20px;
+}
+
+
+table {
+    margin-top: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-spacing: 3px;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    box-shadow: 0 5px 12px rgba(32, 32, 32, 0.3);
+    width: auto;
+    height: auto;
+    background: white;
+    text-align: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 5px;
+}
+
+.grid-container i{
+    cursor: pointer;
+    color: rgb(75, 51, 164);;
+}
+
+
+th,
+td {
+    padding: 10px;
+    font-size: 13.5px;
+    white-space: nowrap;
+}
+
+th {
+    background: rgb(55, 116, 190);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+td {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+
+}
+
+
+tr:nth-child(even) {
+    background-color: rgb(203, 224, 248);
+}
+
+tr:hover {
+    background: rgba(137, 190, 250, 0.849);
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* Adjust the margin as needed */
+}
+
+
+.pagination span {
+    color: white;
+    margin-top: 15px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(55, 116, 190);
+    border-radius: 8px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.pagination a:hover {
+    background-color: rgb(18, 158, 44);
+}
+
+@media (max-width: 768px) {
+
+    .selection{
+        max-width: 80%;
+    }
+
+    .due-clearance{
+        max-width: 80%;
+    }
+
+    .toggle-button {
+        left: 10px; /* Adjust button position */
+        top: 257.5px;
+        width: 120px;
+        font-size: 10px;
+    }
+
+    .ldnd {
+        flex-direction: row; 
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .ldnd input,
+    .ldnd select {
+        width: 200px;
+    }
+
+    .check-div {
+        grid-template-columns: repeat(2, 1fr); /* Less columns on small screens */
+    }
+
+    .check-div label {
+        font-size: 12.5px;
+        width: 200px;
+    }
+
+    table{
+        width: 90%;
+        display: block;
+        overflow-x: auto;
+        height: auto;
+    }
+
+
+    .pagination a {
+        display: inline-block;
+        padding: 12px 20px;
+        text-decoration: none;
+        color: white;
+        background-color: rgb(55, 116, 190);
+        border-radius: 8px;
+        margin: 0 10px;
+        cursor: pointer;
+        font-size: 12.5px;
+    }
+
+    .pagination span{
+        font-size: 12.5px;
+    }
+
+}
+

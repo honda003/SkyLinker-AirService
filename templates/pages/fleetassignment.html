@@ -1,0 +1,415 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Fleet Assignment</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/fleetassignment.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block jquery%}<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+
+<div class="container">
+    <div id="service-section">
+        <h1>Fleet Assignment</h1>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if error_message %}
+        <div class="alert alert-danger">
+            {{ error_message }}
+        </div>
+    {% endif %}
+
+    {% if infeasibility_result %}
+        <h3>Infeasibility Report.</h3>
+        <!-- Example of displaying infeasibility_result if it's a list or dict -->
+        <pre>{{ infeasibility_result | safe }}</pre>
+        <!-- You might need to adjust the display method based on the structure of infeasibility_result -->
+    {% endif %}
+
+    {% if error_messages %}
+        <div class="alert alert-danger">
+            {% for error in error_messages %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if optimized_schedule_html %}
+        <h2>Optimization Results.</h2>
+        {% if objective_value_FAM %}
+            <p2>The Minimized Cost: {{ objective_value_FAM }}$</p2>
+        {% elif objective_value_IFAM %}
+            <p2>The Minimized Cost: {{ objective_value_IFAM }}$</p2>
+        {% elif objective_value_ISD_IFAM %}
+            <p2>The Maximized Profit: {{ objective_value_ISD_IFAM }}$</p2>
+        {% endif %}
+ 
+        {%if optimized_schedule_html%}
+            <div class="schedule-table">
+                {{ optimized_schedule_html | safe }}
+            </div>
+        {% endif %}
+        {% if ron_schedule_html %}
+            <h2 class="decision-variable">Aircrafts Overnight (RON).</h2>
+            {{ ron_schedule_html | safe }}
+        {% endif %}
+
+        {% if spilled_html %}
+            <h2 class="decision-variable">Passenger Spilled Details.</h2>
+            {{ spilled_html | safe }}
+        {% endif %}
+
+        {% if spilled_recaptured_html %}
+            <h2 class="decision-variable">Passenger Spill and Recapture Details.</h2>
+            {{ spilled_recaptured_html | safe }}
+        {% endif %}
+        <div class="button-container">
+            {% if excel_file_url %}
+                <a href="{% url 'download_excel' %}" class="button-link">
+                    <button class="download-report">Download Excel Report</button>
+                </a>
+
+            {% endif %}
+
+            {% for fleet_file in fleet_files %}
+                <a href="{% url 'download-fleet-excel' fleet_file.fleet_type %}" class="button-link">
+                    <button class="download-report">Download {{ fleet_file.fleet_type|cut:"fleet_type_"|cut:"_df" }} Routing Input</button>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+    {% if count_form %}
+        <h2>Enter Number of Fleets.</h2>
+        <form  class="fleet-number"  method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ count_form.as_p }}
+            
+            {% if count_form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {% for error in count_form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit" name="submit_count">Submit</button>
+            </div>
+        </form>
+
+
+    {% endif %}
+
+    {% if detail_forms %}
+    <h2 class="fleet-data-h2">Enter Your Fleet(s) Data.</h2>
+    <form class="fleet-data" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {% for form in detail_forms %}
+            <div class="fleet-header">
+                <h3>Fleet Number {{ forloop.counter }} Details 
+                    <i class="fa-solid fa-angle-down toggle-arrow" onclick="toggleFleetDetails({{ forloop.counter }});" data-index="{{ forloop.counter }}"></i>
+                </h3>
+            </div>
+            <div class="fleet-details" id="fleetDetails{{ forloop.counter }}" style="display:none;">
+                {{ form.as_p }}
+            </div>
+        {% endfor %}
+    
+        <div class="fleet-data-button-container">
+            <button type="submit" name="submit_details">Submit</button>
+        </div>
+    </form>
+    {% endif %}
+    
+    {% if flight_excel_form %}
+        <h2>Upload Flight Data Excel File.</h2>
+        <form class="excel" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ flight_excel_form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+
+        <div class="sample">
+            <p>Please ensure all the columns in the Excel file are correctly filled as per the sample format below.</p>
+            <button class="sample-button" id="previewButton" type="button">Sample</button>
+            <div style="display: none;" id="sampleContainer">
+                <h2>Sample Flight Data</h2>
+                <div class="data-schedule" id="sampleFlightData">
+                    <!-- Table will be loaded here via AJAX -->
+                </div>
+                <!-- Initially hide the download link; it will be shown after AJAX success -->
+                <a href="{% url 'download_flights_sample_excel' %}" class="button-link" style="display: none;" id="downloadLink">
+                    <button class="sample-button">Download</button>
+                </a>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                // Flag to check if data has been loaded
+                var dataLoaded = false;
+            
+                $("#previewButton").click(function() {
+                    // Check if data is already loaded
+                    if (!dataLoaded) {
+                        // Perform AJAX request to fetch data
+                        $.ajax({
+                            url: '{% url "preview_flights_sample" %}',
+                            type: 'get',
+                            success: function(response) {
+                                // Display the fetched HTML table in the div
+                                $('#sampleFlightData').html(response.html_table);
+                                // Data has been successfully loaded
+                                dataLoaded = true;
+                                // Show the download link
+                                $('#downloadLink').show();
+                                // Show the sample data container with a fade in animation
+                                $("#sampleContainer").fadeIn("slow");
+                            },
+                            error: function() {
+                                // Display an error message if the data fetch fails
+                                $('#sampleFlightData').html('<p>No data available to display.</p>');
+                                // Data loading attempt failed, can try again
+                                dataLoaded = false;
+                                // Ensure the download link remains hidden if there's an error
+                                $('#downloadLink').hide();
+                                // Show the error message with a fade in animation
+                                $("#sampleContainer").fadeIn("slow");
+                            }
+                        });
+                    } else {
+                        // Toggle the visibility of the sample container with a fade animation
+                        $("#sampleContainer").fadeToggle("slow");
+                    }
+                });
+            });
+        </script>
+                   
+
+    {% elif flight_column_form %}
+        <h2>Flight Data Missing Columns.</h2>
+        <form class="missing" method="post">
+            {% csrf_token %}
+            {{ flight_column_form.as_p }}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+        </form>
+
+    {% elif solver_selection_form %}
+        <h2>Choose Your Model.</h2>
+        <form class="hub {%if solver_selection_form.hubs.errors%}solver_errors{%endif%}" method="post">
+            {% csrf_token %}
+            {{ solver_selection_form.as_p }}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+        </form>
+
+    {% elif recapture_ratio_form %}
+        <h2>Enter Recapture Ratio.</h2>
+        <form class="recapture-ratio" method="post" action="{% url 'recapture_ratio' %}">
+            {% csrf_token %}
+            {% for field in recapture_ratio_form %}
+            <div class="form-group">
+                <label>{{ field.label }}
+                    <a onmouseover="toggleHelpText('help_{{ field.name }}', event)" onmouseout="hideHelpText('help_{{ field.name }}')">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                </label>
+                {{ field }}
+                <div id="help_{{ field.name }}" class="help-text" style="display:none;">
+                    {{ field.help_text }}
+                </div>
+            </div>
+
+            {% endfor %}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+
+            {% comment %} <!-- Modal -->
+        <div id="helpModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p id="helpText"></p>
+            </div>
+        </div> {% endcomment %}
+
+        </form>
+
+        {% elif demand_factors_form %}
+        <h2>Enter Demand Related Factors.</h2>
+        <form class="demand-related" method="post" action="{% url 'demand_adjustment' %}">
+            {% csrf_token %}
+            {% for field in demand_factors_form %}
+            <div class="form-group">  <!-- Add relative positioning here -->
+                <label>{{ field.label }}
+                    <a onmouseover="toggleHelpText('help_{{ field.name }}', event)" onmouseout="hideHelpText('help_{{ field.name }}')">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                    
+                </label>
+                {{ field }}
+                <div id="help_{{ field.name }}" class="help-text" style="display:none;">
+                    {{ field.help_text }}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+        </form>
+
+                {% comment %} <!-- Modal -->
+        <div id="helpModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p id="helpText"></p>
+            </div>
+        </div> {% endcomment %}
+
+
+    {% elif itinerary_excel_form %}
+        <h2>Upload Itinerary Data Excel File.</h2>
+        <form class="excel" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ itinerary_excel_form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+
+        <div class="back-button-container">
+            <button class="Back-Button" type="button" onclick="window.history.back();">Back</button>
+        </div>
+
+        <div class="sample">
+            <p>Please ensure all the columns in the Excel file are correctly filled as per the sample format below.</p>
+            <button class="sample-button" id="previewButton" type="button">Sample</button>
+            <div style="display: none;" id="sampleContainer">
+                <h2>Sample itinerary Data</h2>
+                <div id="sampleFlightData">
+                    <!-- Table will be loaded here via AJAX -->
+                </div>
+                <!-- Initially hide the download link; it will be shown after AJAX success -->
+                <a href="{% url 'download_itineraries_sample_excel' %}" class="button-link" style="display: none;" id="downloadLink">
+                    <button class="sample-button">Download</button>
+                </a>
+            </div>
+        </div>
+
+
+        <script>
+            $(document).ready(function() {
+                // Flag to check if data has been loaded
+                var dataLoaded = false;
+            
+                $("#previewButton").click(function() {
+                    // Check if data is already loaded
+                    if (!dataLoaded) {
+                        // Perform AJAX request to fetch data
+                        $.ajax({
+                            url: '{% url "preview_itineraries_sample" %}',
+                            type: 'get',
+                            success: function(response) {
+                                // Display the fetched HTML table in the div
+                                $('#sampleFlightData').html(response.html_table);
+                                // Data has been successfully loaded
+                                dataLoaded = true;
+                                // Show the download link
+                                $('#downloadLink').show();
+                                // Show the sample data container with a fade in animation
+                                $("#sampleContainer").fadeIn("slow");
+                            },
+                            error: function() {
+                                // Display an error message if the data fetch fails
+                                $('#sampleFlightData').html('<p>No data available to display.</p>');
+                                // Data loading attempt failed, can try again
+                                dataLoaded = false;
+                                // Ensure the download link remains hidden if there's an error
+                                $('#downloadLink').hide();
+                                // Show the error message with a fade in animation
+                                $("#sampleContainer").fadeIn("slow");
+                            }
+                        });
+                    } else {
+                        // Toggle the visibility of the sample container with a fade animation
+                        $("#sampleContainer").fadeToggle("slow");
+                    }
+                });
+            });
+        </script>
+
+
+    {% elif itinerary_column_form %}
+        <h2>Itinerary Data Missing Columns.</h2>
+        <form class="missing" method="post">
+            {% csrf_token %}
+            {{ itinerary_column_form.as_p }}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+        </form>
+        
+    {% elif optional_flights_form %}
+        <h2>Optional Flights Decision.</h2>
+        <form class="fpd {% if optional_flights_form.errors %}optional_flights_form_errors{% endif %}" method="post">
+            {% csrf_token %}
+            <p>{{ optional_flights_form.has_optional_flights.label_tag }} {{ optional_flights_form.has_optional_flights }}</p>
+            {% if optional_flights_form.has_optional_flights.errors %}
+                {% for error in optional_flights_form.has_optional_flights.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+
+            <div id="optionalFlightOptions" style="display:none;">
+                <p>{{ optional_flights_form.all_flights_optional.label_tag }} {{ optional_flights_form.all_flights_optional }}</p>
+                {% if optional_flights_form.all_flights_optional.errors %}
+                    {% for error in optional_flights_form.all_flights_optional.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <div id="selectSpecificFlights" style="display:none;">
+                    <p>{{ optional_flights_form.select_optional_flights.label_tag }} {{ optional_flights_form.select_optional_flights }}</p>
+                    {% if optional_flights_form.select_optional_flights.errors %}
+                        {% for error in optional_flights_form.select_optional_flights.errors %}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if optional_flights_form.non_field_errors %}
+                {% for error in optional_flights_form.non_field_errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+            
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Optimize</button>
+            </div>
+        </form>
+        
+    {% endif %}
+    <div class="button-container2">
+        <a href="/airlineoperations/fleetassignment" class="ctaa">Another Trial</a>
+        <a href="/documentation/#fleetassignment" class="ctaa" target="_blank">User Manual</a>
+    </div>
+</div>
+{%include 'parts/footer.html'%}
+{%block script%}<script src="{% static 'js/fleetassignment.js' %}" defer></script>{%endblock%}
+{%endblock%}

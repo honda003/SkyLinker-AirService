@@ -1,0 +1,310 @@
+#service-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+}
+
+#service-section h1 {
+    margin-top: 100px;
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    position: relative;
+    align-items: center;
+}
+
+#service-section h1:after {
+    position: absolute;
+    content: " ";
+    top: 8px;
+    left: -30px;
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-left: 20px solid rgb(255, 234, 0);
+}
+
+#service-section h1:before {
+    position: absolute;
+    content: " ";
+    top: 8px;
+    right: -30px;
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-right: 20px solid rgb(255, 234, 0);
+}
+
+#service-section p {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    /* Stack children vertically */
+    align-items: center;
+    /* Center children horizontally */
+    justify-content: center;
+    /* Center children vertically if needed */
+}
+
+form {
+    width: 80%;
+    max-width: 40rem;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    margin-top: 20px;
+}
+
+form label{
+    font-weight: bold;
+    color: white;
+}
+
+form button {
+    background-color: rgb(55, 116, 190);
+    color: white;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 80px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+form .button-container {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    width: 100%;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+form button:hover {
+    background-color: rgb(18, 158, 44);
+}
+
+.selection p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.selection{
+    max-width: 30%;
+}
+
+.selection label{
+    font-size: 15px;
+    max-width: 150px;
+}
+
+.selection input{
+    width: 100px;
+}
+
+.hidden{
+    display: none;
+}
+
+.selection span{
+    max-width: 500px ;
+    color: white;
+}
+
+.selection select{
+    width: 100px;
+}
+
+
+.check-due {
+    max-width: 40%;
+    margin: 0 auto;
+    padding: 20px;
+    color: #fff;
+    border-radius: 8px;
+    margin-bottom: 50px;
+}
+
+.check-due .form-group {
+    margin-bottom: 20px;
+}
+
+.check-due label {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.check-due input,
+.check-due select {
+    width: 235px;
+    padding: 5px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.check-due .helptext {
+    display: block;
+    font-size: 12px;
+    color: #ecf0f1;
+    margin-bottom: 5px;
+}
+
+.check-due .field-errors {
+    color: rgb(255, 56, 56);
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.button-group {
+    display: flex;           
+    justify-content: center; 
+    gap: 30px;               
+    margin-bottom: 20px;     
+}
+
+.button-group button{
+    background-color: rgb(55, 116, 190);
+    color: white;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.button-group button:hover{
+    background-color: rgb(18, 158, 44);
+}
+
+.due-button{
+    width: 90px;
+}
+
+table {
+    margin: 30px 15px;
+    border-spacing: 3px;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    box-shadow: 0 5px 12px rgba(32, 32, 32, 0.3);
+    width: 1000px;
+    height: auto;
+    background: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+th,
+td {
+    padding: 12px 12px;
+}
+
+th {
+    background: rgb(55, 116, 190);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+td {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(203, 224, 248);
+}
+
+tr:hover {
+    background: rgba(137, 190, 250, 0.849);
+}
+
+.container h2 {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: white;
+
+    text-align: center;
+}
+
+.container li{
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.container a.ctaa {
+    color: white;
+    background: rgba(8, 24, 68, 0.829);
+    border: 1px solid transparent;
+    padding: 12px 30px;
+    line-height: 1.4;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 30px;
+    text-transform: uppercase;
+    transition: all .55s ease;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container a.ctaa:hover {
+    background: transparent;
+    border: 1px solid white;
+    transform: translateX(8px);
+}
+
+.button-container2{
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    width: 100%;
+    gap: 50px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+@media(max-width:768px) {
+    #service-section h1 {
+      font-size: 20.5px;
+    }
+
+    .selection{
+        max-width: 80%;
+    }
+
+    .check-due{
+        max-width: 80%;
+    }
+ 
+    table{
+        width: 90%;
+        overflow-x: auto;
+    }
+
+    .airline-table::-webkit-scrollbar, pre::-webkit-scrollbar {
+        height: 5.5px;  /* Height of the horizontal scrollbar */
+    }
+  
+  }

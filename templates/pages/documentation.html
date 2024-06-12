@@ -1,0 +1,401 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Documentation</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/documentation.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block jquery%}<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+<div class="doc-cont">
+<nav2 id="navbar">
+    <header2>Website Documentation</header2>
+    <ul id="ul-navbar">
+        <li>
+            <a class="nav-link" href="#introduction">Introduction</a>
+        </li>
+
+        <li>
+            <a class="nav-link" href="#itinerary-builder">Itinerary Builder</a>
+        </li>
+        <li>
+            <a class="nav-link" href="#market-share">Market Share</a>
+        </li>
+        <li>
+            <a class="nav-link" href="#fleetassignment">Fleet Assignment</a>
+        </li>
+        <li>
+            <a class="nav-link" href="#routing">Aircraft Routing</a>
+        </li>
+        <li>
+            <a class="nav-link" href="#operator">Operator</a>
+        </li>
+        <li>
+            <a class="nav-link" href="#aircraft-data">Aircraft Data</a>
+        </li>
+        <li>
+            <a class="nav-link" href="#amp">Aircraft Maintenance Program</a>
+        </li>
+        <li>
+            <a class="nav-link" href="#ldnd">Last Done Next Due</a>
+        </li>
+        <li>
+            <a class="nav-link" href="#uc">Upcoming Tasks</a>
+        </li>
+    </ul>
+</nav2>
+<main id="main-doc">
+    <section class="main-section" id="introduction">
+        <h2>Introduction</h2>
+        <p>The user manual is a step by step guide to assist user and simplify his/her experience.</p>
+        <ul>
+            {% comment %} <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore quaerat commodi deserunt cum explicabo odio suscipit ab reprehenderit perspiciatis ratione, deleniti blanditiis possimus atque? Eum, quibusdam quod! Perspiciatis, minus enim.</li>
+            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus eum sed tempora delectus possimus et maiores, quisquam corrupti, inventore maxime cupiditate fuga? Cum aspernatur laudantium officia animi quod quos possimus!</li> {% endcomment %}
+        </ul> 
+    </section>
+    <section class="main-section" id="itinerary-builder">
+        <h2>Itinerary Builder</h2>
+        <img class="illustration" src="{% static 'images/1.png' %}" alt="Itinerary Builder Image">
+        <p>The purpose of this module is to generate all possible nonstop, single, and double stop itineraries for the airline.</p>
+        
+        <h3>Procedures</h3>
+        <ol>
+            <li>Upload an Excel file containing the flight schedule data.</li>
+            <p class="note">Note: The file must be in Microsoft Excel format.</p>
+            <p>Example:</p>
+            <img class="illustration" src="{% static 'images/2.png' %}" alt="Sample Flight Schedule">    
+            <li>Upload an Excel file containing the coordinates of the stations (airports).</li>
+            <p class="example">Example:</p>
+            <img class="illustration" src="{% static 'images/3.png' %}" alt="Sample Airport Coordinates">
+    
+            <li>Enter the turnaround time and connection time in minutes, and enter the distance ratio.</li>
+            <p class="defenitions">Definitions:</p>
+            <ul>
+                <li><strong>Turnaround time:</strong> Time between landing and takeoff.</li>
+                <li><strong>Connection time:</strong> Time required for a passenger and baggage to make a connecting flight at an airport.</li>
+                <li><strong>Distance ratio:</strong> A user-defined limit on how far an itinerary can extend from its origin to its destination. It's a multiplier applied to the direct distance between the two points, setting a maximum allowable distance for the itinerary.</li>
+            </ul>
+    
+            <li>Click on "Get Itineraries" to show the output.</li>
+        </ol>
+    
+        <h3 class="notes">Notes</h3>
+        <ul>
+            <li>If there are no feasible single stop or double stop itineraries, there will be no output. In this case, try to change the constraints specified in step 3.</li>
+            <li>If the model doesn't recognize the uploaded Excel files, you’ll be required to enter the number of columns that indicate each of the flight number, origin, departure, etc.</li>
+        </ul>
+    </section>
+
+    <section class="main-section" id="marketshare">
+    <h2>Market Share</h2>
+    <p>The market share module is basically based on statistical models to serve the airlines economically and help them forecast important data.</p>
+    
+    <h3>Procedures</h3>
+    <ol>
+        <li>Upload an Excel file containing historical data.</li>
+        <p>The model begins by asking the user whether he has historical data that includes the passenger’s choice of old itineraries and the characteristics of each itinerary serving the markets. In case the user doesn’t have historical data, pre-calculated coefficients will be used in the forecasting process. The data required is in the following table:</p>
+        <img class="illustration" src="{% static 'images/4.png' %}" alt="Sample Historical Data">
+
+        <li>Upload an Excel file containing itineraries data.</li>
+        <p class="example">The user is asked to list the current itineraries serving the market for himself and his competitors. The data required should be the same as historical data.</p>
+
+        <li>Download Unconstrained Demand Excel File.</li>
+        <p class="defenitions">The website formulates an Excel file for the user containing the unique markets that exist in the uploaded data, and then the user is asked to download this file, as it should be filled out with the unconstrained demand for each market.</p>
+
+
+        <li>Re-upload The Unconstrained Demand Excel File.</li>
+        <p class="note">After filling out the data, the user is asked to re-upload the file.</p>
+        
+
+        <li>View the results.</li>
+        <img class="illustration" src="{% static 'images/5.png' %}" alt="Results">
+        <p class="note">The results will be displayed after the re-upload.</p>
+    </ol>
+
+    <h3 class="notes">Notes</h3>
+    <ul>
+        <li>The module categorizes the markets from markets with low competence to monopolistic markets.</li>
+        <li>It provides a good illustration of the market share of each competitor within a specific market.</li>
+        <li>It gives scientifically calculated recommendations about whether to enter a market or not.</li>
+        <li>It forecasts the demand for all the itineraries based on their characteristics.</li>
+    </ul>
+</section>
+
+    <section class="main-section" id="fleetassignment">
+        <h2>Fleet Assignment</h2>
+        <p>Fleet Assignment is the process of assigning certain fleet types from the airline’s available fleets to a certain flight leg. There are several types of modules under the fleet assignment umbrella; they differ in the complexity of constraints and the required inputs. More complex constraints result in more accurate results.</p>
+        <img class="illustration" src="{% static 'images/6.png' %}" alt="Results">
+        <p>Upon using this module, the airline should be able to know the following:</p>
+        <ul>
+            <li>Each flight is assigned to a certain fleet type.</li>
+            <li>The total cost and profit.</li>
+        </ul>
+    
+        <h3>Important Terminologies</h3>
+        <ul>
+            <li><strong>Recapture Ratio:</strong> How good are your itineraries compared to competitors, indicating their ability to attract passengers in case of cancellation.</li>
+            <li><strong>Decrease in Demand Percentage:</strong> An approximate percentage for the reputation effect or any other decrease in demand on your itineraries due to the cancellation of one of your flights.</li>
+            <li><strong>Increase in Demand Percentage:</strong> An approximate percentage for how many substitutable, high-quality itineraries you have for the same market, e.g., if one itinerary is cancelled, another will recapture 20% of its passengers.</li>
+        </ul>
+    
+        <h3>Procedures</h3>
+        <ol>
+            <li>Upload an Excel file containing flight legs data. The user is asked to upload an Excel file containing flight legs with their characteristics (sample preview and download are options).</li>
+            <li>Enter Fleet Details. At this step, the user should specify the following:
+                <ul>
+                    <li>The number of owned fleets</li>
+                    <li>For each fleet, enter:
+                        <ul>
+                            <li>Fleet type</li>
+                            <li>Number of aircraft in the fleet</li>
+                            <li>Number of seats in this aircraft</li>
+                            <li>Operating cost per mile</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Select Required Solver. Choosing the solver occurs at this step, which will determine the required input at the next step.</li>
+            <li>User Selected FAM
+                <ul>
+                    <li>The user should decide if he has optional flights or not. If yes, the flight numbers will automatically appear for him to select from.</li>
+                    <li>Press optimize and the results are shown with the option to download optimization report and files to be used in aircraft routing.</li>
+                </ul>
+            </li>
+            <li>User Selected IFAM
+                <ul>
+                    <li>The user should determine the value of his recapture ratio.</li>
+                    <li>Upload an Excel file containing itineraries data with their characteristics.</li>
+                    <li>Press optimize and the results are shown with the option to download optimization report and files to be used in aircraft routing.</li>
+                </ul>
+            </li>
+            <li>User Selected ISD-IFAM
+                <ul>
+                    <li>The user should decide the value of his recapture ratio.</li>
+                    <li>The user should decide the increase in demand percentage.</li>
+                    <li>The user should decide the decrease in demand percentage.</li>
+                    <li>Upload an Excel file containing itineraries data with their characteristics.</li>
+                    <li>The user should decide if he has optional flights or not. If yes, the flight numbers will automatically appear for him to select from.</li>
+                    <li>Press optimize and the results are shown with the option to download optimization report and files to be used in aircraft routing.</li>
+                </ul>
+            </li>
+        </ol>
+        <p class="note">Note that for all the Excel files that need to be uploaded, a sample preview of the required data and a download option for this sample is available to fill out with your own data.</p>
+    </section>
+
+    
+    <section class="main-section" id="routing">
+        <h2 class="routing">Aircraft Routing</h2>
+        <p>The Aircraft Routing module on the website is designed to help airlines optimize their flight schedules and aircraft maintenance plans.</p>
+        
+        <h3>Procedures</h3>
+        <ol>
+            <li>Upload Flight Schedule.</li>
+            <p class="note">Note: The file must be in Microsoft Excel format.</p>
+        
+            <li>Enter Key Fields.</li>
+            <p class="defenitions">Definitions:</p>
+            <ul>
+                <li><strong>Turnaround Time:</strong> (minutes) The minimum time required for an aircraft to be ready for its next flight.</li>
+                <li><strong>Maintenance Hubs:</strong> Select the checkbox beside the hub(s) where the user wants to perform aircraft maintenance.</li>
+            </ul>
+            
+            <li>Specify The Number of Flights.</li>
+            <p class="note">The website will calculate the maximum number of flights per day that the uploaded schedule can operate. The user has two options:</p>
+            <ul>
+                <li><strong>Option A:</strong> Select to use the calculated maximum number of flights per day in the model.</li>
+                <li><strong>Option B:</strong> Specify a different number of flights per day if the user prefers a custom setting.</li>
+            </ul>
+    
+            <li>Enter Routing Cycle.</li>
+            <p class="example">Period over which the aircraft routing will repeat.</p>
+    
+            <li>Enter Fleet Size.</li>
+
+            <li>View Output Schedule.</li>
+            <p class="note">The output is displayed as a schedule with the following columns:</p>
+            <ul>
+                <li><strong>Objective Value:</strong> Indicates the number of stops the aircraft will make at the selected hub(s) for maintenance.</li>
+                <li>Each route number will correspond to the same routing number over the N-day cycle.</li>
+            </ul>
+            <img src="{% static 'images/7.png' %}" alt="Output Schedule">
+        </ol>
+    </section>
+    
+
+    <section class="main-section" id="operator">
+        <h2 class="routing">Operator</h2>
+    <p>This page contains comprehensive data on the operational activities of the airline's aircraft. To maintain airworthiness, numerous maintenance tasks are performed at various intervals based on time, flight hours, or flight cycles. Airlines typically organize these tasks into two main types of maintenance packages: L packages and C packages.</p>
+    <h3>Maintenance Packages</h3>
+    <ul>
+        <li><strong>L packages:</strong> Encompass tasks with short intervals that require minimal time and no special tools.</li>
+        <li><strong>C packages:</strong> Involve more extensive tasks, such as overhauls, which are conducted at longer intervals. Tasks with similar or closely aligned intervals are grouped together into these maintenance packages for efficiency.</li>
+    </ul>
+    <p class="note">Airlines usually have the following packages:</p>
+    <ul>
+        <li>Daily package: usually for tasks made on a daily basis.</li>
+        <li>Weekly package: usually for tasks made on a weekly basis.</li>
+        <li>Service package: tasks lie between weekly tasks and the L1 package tasks.</li>
+        <li>L packages (ex: L1, L2, L3 … and their number and intervals depend on the operator).</li>
+        <li>C packages (ex: C1, C2, C3 … and their number and intervals depend on the operator).</li>
+    </ul>
+    
+    <h3>Required Data from the User</h3>
+    <ol>
+        <li>Airline Name</li>
+        <li>Flight Cycles Per Day: Also known as utilization cycles and it is the number of cycles operated per day.</li>
+        <li>Flight Hours Per Day: Also known as utilization hours and it is the maximum number of hours operated per day.</li>
+        <li>Daily Package Interval in Days</li>
+        <li>Weekly Package Interval in Days</li>
+        <p class="note">From their name, daily and weekly packages don’t have flight hour or flight cycle intervals.</p>
+        <li>Service Package Interval in Days/ Flight Hours/ Flight Cycles</li>
+        <li>Number of L Packages</li>
+        <li>L1 Package Interval in Days</li>
+        <li>L1 Package Interval in Flight Hours</li>
+        <li>L1 Package Interval in Flight Cycles</li>
+        <li>Number of C Packages</li>
+        <li>C1 Package Interval in Days</li>
+        <li>C1 Package Interval in Flight Hours</li>
+        <li>C1 Package Interval in Flight Cycles</li>
+        <li>Number of Aircraft</li>
+    </ol>
+    
+    <h3>Aircraft Data Requirements</h3>
+    <p>Based on the number of aircraft the airline has, a number of requirements relative to each aircraft are required:</p>
+    <ul>
+        <li>Aircraft Production Date</li>
+        <li>Aircraft Name</li>
+        <li>Aircraft Type</li>
+        <li>Aircraft Serial Number</li>
+        <li>Aircraft Line Number</li>
+        <li>Aircraft Block Number</li>
+    </ul>
+    
+    <h3>User Current Status</h3>
+    <ul>
+        <li>All of the data submitted by the user is stored in the database at the Operator section on the website.</li>
+        <li>This database can only be accessed through the admin panel.</li>
+        <li>Only authorized users can interact with the database whether by Adding, Editing or Deleting.</li>
+        <li>User’s next step is to navigate to the Aircraft Data page for further required data.</li>
+    </ul>
+    
+    <h3 class="notes">Important</h3>
+    <ul>
+        <li>Only registered users can access the Operator page.</li>
+        <li>All of the data is necessary as it will be used in further modules.</li>
+        <li>Maintenance-related procedures are critical; therefore any misinformation entered could lead to unexpected errors or miscalculations.</li>
+    </ul>
+</section>
+
+<section class="main-section" id="aircraft-data">
+    <h2>Aircraft Data</h2>
+    <p>This page contains all the data regarding the already submitted aircraft in the Operator page. As the user is dealing with a database that is most likely to be huge, the first thing the user has to clarify on this page is:</p>
+    <ul>
+        <li>Select their Airline Name (submitted on the Operator page)</li>
+        <li>Choose the Aircraft Name to which this data is being filled (submitted in the Operator page)</li>
+    </ul>
+    
+    <h3>Required Data from the User</h3>
+    <ol>
+        <li>Choose Airline Name</li>
+        <li>Choose Aircraft Name</li>
+        <li>Current Date: This field is automatically filled with today’s date but it can be modified.</li>
+        <li>Current Flight Hours: This field represents the number of flight hours the aircraft did on the Current Date field.</li>
+        <li>Current Flight Cycles: This field represents the number of flight cycles the aircraft did on the Current Date field.</li>
+        <li>APU Serial Number</li>
+        <li>APU Flight Hours: This field represents the number of flight hours the APU did on the Current Date field.</li>
+        <li>APU Flight Cycles: This field represents the number of flight cycles the APU did on the Current Date field.</li>
+        <li>APU HRS to A/C HRS: This field represents the ratio of flight hours the APU makes to the number of flight hours the aircraft makes.</li>
+        <li>Number of Engines</li>
+        <p class="note">Based on the number of engines the aircraft has, a number of requirements relative to each engine are required:</p>
+        <ul>
+            <li>Engine Serial Number</li>
+            <li>Engine Flight Hours</li>
+            <li>Engine Flight Cycles</li>
+        </ul>
+    </ol>
+    
+    <h3>User Current Status</h3>
+    <ul>
+        <li>All of the data submitted by the user is stored in their database in the Aircraft Data section on the website.</li>
+        <li>This database can only be accessed through the admin panel.</li>
+        <li>Only authorized users can interact with the database whether by Adding, Editing, or Deleting.</li>
+        <li>User’s next step is to navigate to the Admin Panel for further required data.</li>
+    </ul>
+    
+    <h3 class="notes">Important</h3>
+    <ul>
+        <li>Only registered users can access the Aircraft Data page.</li>
+        <li>All of the data is necessary as it will be used in further modules.</li>
+        <li>Maintenance-related procedures are critical; therefore any misinformation entered could lead to unexpected errors or miscalculations.</li>
+    </ul>
+</section>
+
+    <section class="main-section" id="amp">
+        <h2>AMP</h2>
+        <p>The AMP page is dedicated to viewing the AMP database with better visualization.</p>
+    
+        <h3>Features</h3>
+        <ul>
+            <li>The data is visualized in table format.</li>
+            <li>There is an option to hide/view columns for better visualization.</li>
+            <li>Search fields are available for fields like MPD Item Number and Task Card Number.</li>
+            <li>Filtering fields are available for fields like Airline, Aircraft Applicability, etc.</li>
+        </ul>
+        
+        <h3 class="notes">Important</h3>
+        <ul>
+            <li>Only registered users can access the AMP page for a better illustration of their data.</li>
+        </ul>
+    </section>
+
+    <section class="main-section" id="ldnd">
+        <h2>LDND</h2>
+        <p>The LDND page is dedicated to viewing the LDND database with better visualization. Authorized users can also update tasks Last-Done, and these changes will be recorded in the recent actions in the admin panel.</p>
+    
+        <h3>Features</h3>
+        <ul>
+            <li>The data is visualized in table format.</li>
+            <li>There is an option to hide/view columns for better visualization.</li>
+            <li>Search fields are available for fields like MPD Item Number and Task Card Number.</li>
+            <li>Filtering fields are available for fields like Airline, Aircraft Package, Airline Due, MPD Due, etc.</li>
+            <li>Option to update single task last done data.</li>
+            <li>Option to update package last done data.</li>
+        </ul>
+        
+        <h3 class="notes">Important</h3>
+        <ul>
+            <li>Only registered users can access the LDND page for a better illustration of their data.</li>
+            <li>Only authorized users can modify the LDND database.</li>
+        </ul>
+    </section>
+
+
+    <section class="main-section" id="uc">
+        <h2>Upcoming Tasks</h2>
+        <p>Upon completing the LDND module and having the complete data with their next due dates, a new feature can be used on the upcoming tasks page. On this page, the user can enter a date in the future, or even after a certain number of flight hours or flight cycles, and then see the tasks that will be due at this specific time. This allows for preparation of the aircraft for these maintenance tasks or even optimization of the flight schedule based on this information.</p>
+    
+        <h3>Required Inputs</h3>
+        <ul>
+            <li>Choose the Airline</li>
+            <li>Choose the Aircraft</li>
+            <li>Choose the duration either by:
+                <ul>
+                    <li>Entering a date in the future</li>
+                    <li>Specifying a certain amount of flight hours</li>
+                    <li>Specifying a certain amount of flight cycles</li>
+                    <li>Using a combination of the three</li>
+                </ul>
+            </li>
+        </ul>
+    
+        <h3>Mailing System</h3>
+        <p>To maintain operator awareness, an automatic mailing system has been integrated into the website. This system continuously monitors the upcoming tasks due within the next month and automatically sends notifications to authorized users at the beginning of each month, ensuring timely action and oversight.</p>
+    </section>
+
+   
+
+
+</main>
+</div>
+{% include 'parts/footer.html' %}
+{%block script%}<script src="{% static 'js/documentation.js' %}"></script>{%endblock%}
+{% endblock %}
+

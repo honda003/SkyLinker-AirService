@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Maintenance Dashboard</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/maintenance_dashboard.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+
+<div class="content">
+<div class="service-container">
+    <div id="service-section">
+      <h2>Maintenance Dashboard</h2>
+      <p>Welcome, {{ request.user.username }}.</p>
+      <p1>Please choose an option from below.</p1>
+      <div class="cards">
+        <a href="{% url 'operator' %}">
+        <div class="card">
+          <div class="card-content">
+            <h3>Operator</h3>
+          </div>
+        </div>
+        </a>
+        <a href="{% url 'aircraft_data_view' %}">
+        <div class="card">
+          <div class="card-content">
+            <h3>Aircraft Data</h3>
+          </div>
+        </div>
+        </a>
+        <a href="{% url 'excel_data_view' %}">
+        <div class="card">
+            <div class="card-content">
+              <h3>AMP</h3>  
+            </div>
+        </div>
+        </a>
+        <a href="{% url 'last_done_list' %}">
+          <div class="card">
+              <div class="card-content">
+                <h3>LDND</h3>  
+              </div>
+          </div>
+          </a>
+          <a href="{% url 'uk_choose_airline_aircraft' %}">
+            <div class="card">
+                <div class="card-content">
+                  <h3>Upcoming Tasks</h3>  
+                </div>
+            </div>
+            </a>
+      </div>
+    </div>
+  </div>
+
+
+<a href="{% url 'logout' %}" class="ctaa">Logout</a>
+</div>
+
+{%include 'parts/footer.html'%}
+{%endblock%}

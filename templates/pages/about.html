@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Abous Us</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/about.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block content%}
+{%include 'parts/header.html'%}
+  <div class="about-content">
+    <div class="about-text">
+      <h2>About Us</h2>
+      <h3>Aeronautical Engineers and Developers</h3>
+      <p>SkyLinker team is a group consists of five Engineers with Aeronautical and Aviation Management major that
+        decided to
+        take the knowledge of their studies with the assistance if their passion to develop a comprehensive web platform
+        tailored to manage airline
+        operations and maintenance management for airlines. This diverse team collaborate closely to deliver a robust
+        and
+        user-friendly web
+        platform that effectively manages airline operations and maintenance management, meeting
+        the industry's demands for efficiency, reliability, and compliance.</p>
+    </div>
+    <div class="about-img">
+      <img src="{% static 'images/gp_photo.jpg' %}" alt="">
+    </div>
+  </div>
+
+
+  <div class="meettheteam-container">
+    <div id="meettheteam-section">
+      <h2>Meet the Team</h2>
+      <p id="paragraph">The front-end developer focuses on designing and implementing the user interface (UI)
+        and user experience (UX) of the web platform. The back-end developer is responsible for
+        implementing the server-side logic, business logic, and data processing capabilities
+        of the web platform.</p>
+      <div class="meet-cards">
+        <div class="meet-card">
+          <div class="meet-card-content">
+            <div class="img-container">
+              <img src="{% static 'images/sarah.jpg' %}" alt="" />
+            </div>
+            <h3>Sarah Azmi</h3>
+            <p>Team Leader <br> Front-End Developer</p>
+            <div class="icons">
+              <a href="https://www.linkedin.com/in/sarah-azmi-505b58297/" target="_blank" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              {% comment %} <a href="#" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a> {% endcomment %}
+            </div>
+          </div>
+        </div>
+        <div class="meet-card">
+          <div class="meet-card-content">
+            <div class="img-container">
+              <img src="{% static 'images/mohannad.jpg' %}" alt="" />
+            </div>
+            <h3>Mohannad Hossam</h3>
+            <p>Full-Stack Developer</p>
+            <div class="icons">
+              <a href="https://www.linkedin.com/in/mohaned-hosny-11b92b272/"  target="_blank" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              {% comment %} <a href="#" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a> {% endcomment %}
+            </div>
+          </div>
+        </div>
+        <div class="meet-card">
+          <div class="meet-card-content">
+            <div class="img-container">
+              <img src="{% static 'images/mariam.jpg' %}" alt="" />
+            </div>
+            <h3>Mariam Hesham</h3>
+            <p>Back-End Developer</p>
+            <div class="icons">
+              <a href="https://www.linkedin.com/in/mariam-hesham-8808571b3/" target="_blank" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              {% comment %} <a href="#" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a> {% endcomment %}
+            </div>
+          </div>
+        </div>
+        <div class="meet-card">
+          <div class="meet-card-content">
+            <div class="img-container">
+              <img src="{% static 'images/eslam.jpg' %}" alt="" />
+            </div>
+            <h3>Eslam Mahmoud</h3>
+            <p>Back-End Developer</p>
+            <div class="icons">
+              <a href="https://www.linkedin.com/in/eslammahmoud01/" target="_blank" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              {% comment %} <a href="#" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a> {% endcomment %}
+            </div>
+          </div>
+        </div>
+        <div class="meet-card">
+          <div class="meet-card-content">
+            <div class="img-container">
+              <img src="{% static 'images/abdullah.jpg' %}" alt="" />
+            </div>
+            <h3>Abdullah Mohamed</h3>
+            <p>Algorithm Developer</p>
+            <div class="icons">
+              <a href="https://www.linkedin.com/in/abdullah-kamel20/" target="_blank" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              {% comment %} <a href="#" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% include 'parts/footer.html' %}
+{% endblock %}

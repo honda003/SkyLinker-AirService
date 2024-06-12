@@ -1,0 +1,112 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Aircraft Data</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/aircraftdata.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block jquery%}<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+<div id="service-section">
+    <h1 class="title">Welcome to Aircraft Data</h1>
+</div>
+    {% if not form_submitted %}
+    <div class="form-control {%if form.current_flight_hours.errors or eng_fh_errors %}errors{%endif%} ">
+        <form method="post">
+            {% csrf_token %}
+            <p>
+                {{ form.Airline_Name.label_tag }}<br>
+                {{ form.Airline_Name }}
+            </p>
+            <p>
+                {{ form.Aircraft_Name.label_tag }}<br>
+                {{ form.Aircraft_Name }}
+            </p>
+            <p>
+                {{ form.current_date.label_tag }}<br>
+                {{ form.current_date }}
+            </p>
+            <p>
+                {{ form.current_flight_hours.label_tag }}<br>
+                {{ form.current_flight_hours }}
+                {% if form.current_flight_hours.errors %}
+                    <div style="color: red;">
+                        {{ form.current_flight_hours.errors.as_text }}
+                    </div>
+                {% endif %}
+            </p>
+            <p>
+                {% if eng_fh_errors %}
+                    <div style="color: red;">
+                        <ul>
+                            {% for error in eng_fh_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </p>
+            <p>
+                {{ form.current_flight_cycles.label_tag }}<br>
+                {{ form.current_flight_cycles }}
+            </p>
+            <p>
+                {{ form.apu_sn.label_tag }}<br>
+                {{ form.apu_sn }}
+            </p>
+            <p>
+                {{ form.apu_fh.label_tag }}<br>
+                {{ form.apu_fh }}
+            </p>
+            <p>
+                {{ form.apu_fc.label_tag }}<br>
+                {{ form.apu_fc }}
+            </p>
+            <p>
+                {{ form.apu_hours_to_flight_hours_ratio.label_tag }}<br>
+                {{ form.apu_hours_to_flight_hours_ratio }}
+            </p>
+            <br>
+            <!-- Number Of Engines input -->
+            {{ engines_form.as_p }}
+            <br>
+            <!-- Production dates and Aircraft Types -->
+            <div id="Engine-Serial-Number"></div>
+            <br>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    {%endif%}
+    
+    <div class="table-container">
+    {% if aircraft_df %}
+    <h2>Aircraft Data.</h2>
+        <div class="ds-table">
+            {{ aircraft_df | safe }}
+        </div>
+    {% endif %}
+
+    {% if apu_df %}
+    <h2>APU Data.</h2>
+        <div class="ds-table">
+            {{ apu_df | safe }}
+        </div>
+    {% endif %}
+
+    {% if eng_df %}
+    <h2>Engine Data.</h2>
+        <div class="ds-table">
+            {{ eng_df | safe }}
+        </div>
+    {% endif %}
+
+    </div>
+<div class="button-container2">
+    <a href="/maintenance/aircraftdata" class="ctaa">Another Trial</a>
+    <a href="/documentation/#aircraft-data" class="ctaa">User Manual</a>
+</div>
+</div>
+
+{%include 'parts/footer.html'%}
+{%block script%}<script src="{% static 'js/aircraftdata.js' %}"></script>{%endblock%}
+{%endblock%}

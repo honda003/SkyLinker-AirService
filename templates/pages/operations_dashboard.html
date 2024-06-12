@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Airline Operations Dashboard</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/operations_dashboard.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+<div class="content">
+    <div class="service-container">
+        <div id="service-section">
+          <h2>Airline Operations Dashboard</h2>
+          <p>Welcome, {{ request.user.username }}.</p>
+          <p1>Please choose an option from below.</p1>
+          <div class="cards">
+            <a href="{% url 'upload_excel_Itin' %}">
+            <div class="card">
+              <div class="card-content">
+                <h3>Itinerary Builder</h3>
+              </div>
+            </div>
+            </a>
+            <a href="{% url 'use_historical_data' %}">
+                <div class="card">
+                  <div class="card-content">
+                    <h3>Market Share</h3>
+                  </div>
+                </div>
+                </a>
+                <a href="{% url 'upload_flights_excel' %}">
+                    <div class="card">
+                      <div class="card-content">
+                        <h3>Fleet Assignment</h3>
+                      </div>
+                    </div>
+                    </a>
+                    <a href="{% url 'upload_excel' %}">
+                        <div class="card">
+                          <div class="card-content">
+                            <h3>Routing</h3>
+                          </div>
+                        </div>
+                        </a>
+          </div>
+        </div>
+      </div>
+    <a href="{% url 'logout' %}" class="ctaa">Logout</a>
+</div>
+    
+    {%include 'parts/footer.html'%}
+    {%endblock%}

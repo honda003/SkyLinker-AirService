@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Home</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/home.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+<main>
+  <section class="aircraft">
+    <div class="aircraft-text">
+      <h1>SkyLinker AirService</h1>
+      <p>SkyLiner AirService is an easy tool for all the airlines services. It is the perfect way to plan, start and
+        operate your
+        airline with simple steps and couple clicks. Hurry up and start your dream airline NOW!</p>
+        <a href="https://drive.google.com/file/d/1i7vnOJ37HJ6cx9viAKDTmzTDXvzFvnxj/view?usp=drive_link" target="_blank"  class="ctaa"><i class="ri-play-fill">Watch Demo Video</i></a>
+    </div>
+    <div class="aircraft-img">
+      <img src="{% static 'images/aircraft.png' %}" alt="Aircraft-on-earth">
+    </div>
+  </section>
+
+  <div class="icons">
+    <a href="https://www.instagram.com/skylinkerr_airservicee_?igsh=eGt1a3VjazB3YXh6" target="_blank"><i class="ri-instagram-line"></i></a>
+    <a href="https://drive.google.com/file/d/1i7vnOJ37HJ6cx9viAKDTmzTDXvzFvnxj/view?usp=drive_link" target="_blank"><i class="ri-youtube-fill"></i></a>
+    <a href="#"><i class="ri-facebook-circle-line"></i></a>
+  </div>
+  <div class="scroll-down">
+    <a href="#" id="scroll-to-bottom"><i class="fa fa-caret fa-caret-down"></i></a>
+  </div>
+  
+
+
+  <div class="service-container  animated">
+    <div id="service-section">
+      <h2>Services</h2>
+      <p id="paragraph">SkyLinker is the new airline partner. It offers all help you need in fleet and crew operation
+        in
+        both the preparation phase and during airline operation. Not only that but it also handls your aircraft needs
+        by
+        organizing the maintenance tasks</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-content">
+            <h3>Airline Operations</h3>
+            <p>Offers effective airline operations through market analysis,
+              itinerary building, fleet assignment, and aircraft routing. </p>
+
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <h3>Maintenance</h3>
+            <p>Offers effective maintenance management to ensure the safety,
+              reliability, and airworthiness of an airline's fleet. </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="about-content animated">
+    <img src="{% static 'images/gp_photo.jpg' %}" alt="team-photo">
+    <div class="about-text">
+      <h2>Who We Are</h2>
+      <p>Passionate engineers decided to take their knowledge and 5 years of education to another level by making an
+        easy user-friendly web platform that effectively manages airline operations and maintenance management,
+        meeting the industry's demands for efficiency, reliability, and compliance.</p>
+      <a href="/about/" title="Visit the About Page"><button type="button">About Us</button></a>
+    </div>
+  </div>
+  
+
+
+  <div class="meettheteam-container animated">
+    <div id="meettheteam-section">
+      <h2>Meet the Team</h2>
+      <p id="paragraph">The front-end developer focuses on designing and implementing the user interface (UI)
+        and user experience (UX) of the web platform. The back-end developer is responsible for
+        implementing the server-side logic, business logic, and data processing capabilities
+        of the web platform.</p>
+      <div class="meet-cards">
+        <div class="meet-card">
+          <div class="meet-card-content">
+            <div class="img-container">
+              <img src="{% static 'images/sarah.jpg' %}" alt="Sarah's photo" />
+            </div>
+            <h3>Sarah Azmi</h3>
+            <p>Team Leader <br> Front-End Developer</p>
+            <div class="meet-icons">
+              <a href="https://www.linkedin.com/in/sarah-azmi-505b58297/"  target="_blank" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              {% comment %} <a href="#" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a> {% endcomment %}
+            </div>
+          </div>
+        </div>
+        <div class="meet-card">
+          <div class="meet-card-content">
+            <div class="img-container">
+              <img src="{% static 'images/mohannad.jpg' %}" alt="Mohannad's photo" />
+            </div>
+            <h3>Mohannad Hossam</h3>
+            <p>Full-Stack Developer</p>
+            <div class="meet-icons">
+              <a href="https://www.linkedin.com/in/mohaned-hosny-11b92b272/" target="_blank" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              {% comment %} <a href="#" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a> {% endcomment %}
+            </div>
+          </div>
+        </div>
+        <div class="meet-card">
+          <div class="meet-card-content">
+            <div class="img-container">
+              <img src="{% static 'images/mariam.jpg' %}" alt="Mariam's photo" />
+            </div>
+            <h3>Mariam Hesham</h3>
+            <p>Back-End Developer</p>
+            <div class="meet-icons">
+              <a href="https://www.linkedin.com/in/mariam-hesham-8808571b3/" target="_blank" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              {% comment %} <a href="#" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a> {% endcomment %}
+            </div>
+          </div>
+        </div>
+        <div class="meet-card">
+          <div class="meet-card-content">
+            <div class="img-container">
+              <img src="{% static 'images/eslam.jpg' %}" alt="Eslam's photo" />
+            </div>
+            <h3>Eslam Mahmoud</h3>
+            <p>Back-End Developer</p>
+            <div class="meet-icons">
+              <a href="https://www.linkedin.com/in/eslammahmoud01/" target="_blank" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              {% comment %} <a href="#" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a> {% endcomment %}
+            </div>
+          </div>
+        </div>
+        <div class="meet-card">
+          <div class="meet-card-content">
+            <div class="img-container">
+              <img src="{% static 'images/abdullah.jpg' %}" alt="Abdallah's photo" />
+            </div>
+            <h3>Abdullah Mohamed</h3>
+            <p>Algorithm Developer</p>
+            <div class="meet-icons">
+              <a href="https://www.linkedin.com/in/abdullah-kamel20/" target="_blank" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              {% comment %} <a href="#" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{%include 'parts/footer.html'%}
+{%block script%}<script src="{% static 'js/home.js' %}"></script>{%endblock%}
+{%endblock%}

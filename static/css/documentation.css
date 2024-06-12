@@ -1,0 +1,159 @@
+.doc-cont{
+    display: flex;
+    flex-direction: row;
+    line-height: 1.5;
+}
+
+/* el goz2 elli 3l shmal */
+
+#navbar {
+    position: fixed;  /* Makes the navbar fixed during scrolling */
+    top: 0;           /* Aligns the navbar at the top of the viewport */
+    left: 0;          /* Aligns the navbar to the left of the viewport */
+    width: 20%;       /* Or whatever width you prefer */
+    height: 80vh;    /* Makes the navbar take the full height of the viewport */
+    margin-top: 100px;    /* Adjusts the margin to align with the top of the viewport */
+    overflow-y: auto;
+}
+
+#navbar::-webkit-scrollbar {
+    width: 5px;  /* Makes the scrollbar thin */
+}
+
+#navbar::-webkit-scrollbar-track {
+    background-color: #f1f1f1;  /* Light grey track */
+}
+
+#navbar::-webkit-scrollbar-thumb {
+    background-color: rgb(0 0 0/75%);;  /* Dark grey scroll thumb */
+}
+
+#navbar::-webkit-scrollbar-thumb:hover {
+    background-color: #555;  /* Darker grey scroll thumb on hover */
+}
+
+.nav-link {
+    text-decoration: none;
+    font-family: 'Open Sans';
+    color: white;
+    line-height: 1.5;
+    text-align: center;
+}
+#ul-navbar{
+    list-style: none;
+}
+
+.illustration{
+    margin: 20px 20px;
+
+}
+
+#ul-navbar li{
+    border-top: 1px solid rgba(248, 248, 248, 0.639);
+    width: 100%;
+    padding: 11px 0;
+    margin: 0;
+}
+
+/* website documentation word */
+header2{
+    color: white;
+    font-size: 1.8em;
+    font-weight: thin;
+
+}
+
+nav2{
+    margin: 20px;
+}
+
+/* End */
+
+/* el goz2 elli 3l yemen */
+main{
+    margin: 20px;
+    color: white;
+}
+.main-section {
+    padding-top: 100px; /* Adjust this value to match your header's height */
+    margin-top: -100px; /* Negative margin to offset the padding */
+}
+#main-doc {
+    margin-top: 100px;
+    margin-left: 25%;  /* Pushes the main content to the right to prevent overlap with the navbar */
+    width: 75%;        /* Adjusts the width of the main content area */
+}
+
+ol{
+    margin-top: 20px;
+}
+
+.note{
+    margin-left: 40px;
+    color: rgb(255, 234, 0);
+    margin-top: 20px;
+}
+
+.routing{
+    margin-top: 50px;
+}
+
+.notes{
+    margin-top: 20px;
+    color: rgb(255, 234, 0)
+}
+
+.example{
+    margin-top: 20px;
+}
+
+.defenitions{
+    margin-top: 20px;
+}
+
+#main-doc ul {
+    list-style: none; /* Removes the default list-style */
+    padding-left: 0; /* Removes any default padding */
+}
+
+#main-doc li {
+    margin:20px 0px 0px 40px; /* Adds left margin for indentation */
+    list-style: square; /* Adds a circle marker */
+}
+
+#main-doc ul {
+    margin-bottom: 50px; /* Adds a bottom margin to each element */
+}
+#main-doc h2{
+    margin-bottom: 20px;
+}
+
+#main-doc h3{
+    margin-top: 20px;
+}
+
+#main-doc p{
+    margin-top: 20px;
+}
+/* end */
+
+
+@media(max-width: 768px) {
+    .doc-cont {
+        flex-direction: column;
+        margin-top: 100px;
+    }
+
+    #navbar {
+        position: static;
+        width: 100%;
+        height: auto;
+        margin-top: 0;
+        overflow-y: visible;
+    }
+
+    #main-doc {
+        margin-left: 10px;
+        width: 100%;
+    }
+}

@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Last Done Next Due</title>{% endblock %}
+
+{% block stylesheet %}<link href="{% static 'css/ldnd.css' %}" rel="stylesheet" type="text/css">{% endblock %}
+
+{% block content %}
+{% include 'parts/header.html' %}
+<div class="container">
+
+    <div id="service-section">
+        <h1>Last Done Next Due</h1>
+    </div>
+
+    {% if form %}
+        <!-- Selection Form for Airline and Aircraft -->
+        <form class="selection" method="post" action="{% url 'choose_airline_aircraft' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="button-container">
+                <button type="submit">Next</button>
+            </div> 
+        </form>
+    {% endif %}
+
+<!-- This section is for updating Due Clearance -->
+    {% if forms %}
+        <h2>State Due Clearance</h2>
+        <form class="due-clearance" method="post" action="{% url 'state_due_clearance' %}">
+            {% csrf_token %}
+            {% for form in forms %}
+                <div class="due-clearance-form">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div> 
+        </form>
+    {% endif %}
+</div>
+
+<!-- Only display the following content if selections are made -->
+
+
+{% if request.session.airline_id and request.session.aircraft_id %}
+    {% if filter_form %}
+        <form class="ldnd" method="get" action="{% url 'last_done_list' %}">
+            {{ filter_form.as_p }}
+            <button type="submit">Filter</button>
+        </form>
+
+   
+
+
+    <h3>Show/Hide:</h3>
+    <div class="check-div">
+        <input type="checkbox" id="airline" onclick="toggleColumns([0], this.checked)" checked>
+        <label for="airline">Airline Name</label>
+        <input type="checkbox" id="aircraft" onclick="toggleColumns([1], this.checked)" checked>
+        <label for="aircraft">Aircraft Name</label>
+        <input type="checkbox" id="mpd-number" onclick="toggleColumns([2], this.checked)" checked>
+        <label for="mpd-number">MPD Number</label>
+        <input type="checkbox" id="last-done-date" onclick="toggleColumns([3], this.checked)" checked>
+        <label for="last-done-date">Last Done Date</label>
+        <input type="checkbox" id="last-done-fh" onclick="toggleColumns([4], this.checked)" checked>
+        <label for="last-done-fh">Last Done FH</label>
+        <input type="checkbox" id="last-done-fc" onclick="toggleColumns([5], this.checked)" checked>
+        <label for="last-done-fc">Last Done FC</label>
+        <input type="checkbox" id="button" onclick="toggleColumns([6], this.checked)" checked>
+        <label for="button">Update Last Done</label>
+        <input type="checkbox" id="package" onclick="toggleColumns([7], this.checked)" checked>
+        <label for="package">Package</label>
+        <input type="checkbox" id="airline-next-due-date" onclick="toggleColumns([8], this.checked)" checked>
+        <label for="airline-next-due-date">Airline Next Due by Date</label>
+        <input type="checkbox" id="airline-next-due-fh" onclick="toggleColumns([9], this.checked)" checked>
+        <label for="airline-next-due-fh">Airline Next Due by FH</label>
+        <input type="checkbox" id="airline-next-due-fc" onclick="toggleColumns([10], this.checked)" checked>
+        <label for="airline-next-due-fc">Airline Next Due by FC</label>
+        <input type="checkbox" id="airline-due" onclick="toggleColumns([11], this.checked)" checked>
+        <label for="airline-due">Airline Due</label>
+        <input type="checkbox" id="mpd-next-due-date" onclick="toggleColumns([12], this.checked)" checked>
+        <label for="mpd-next-due-date">MPD Next Due by Date</label>
+        <input type="checkbox" id="mpd-next-due-fh" onclick="toggleColumns([13], this.checked)" checked>
+        <label for="mpd-next-due-fh">MPD Next Due by FH</label>
+        <input type="checkbox" id="mpd-next-due-fc" onclick="toggleColumns([14], this.checked)" checked>
+        <label for="mpd-next-due-fc">MPD Next Due by FC</label>
+        <input type="checkbox" id="mpd-due" onclick="toggleColumns([15], this.checked)" checked>
+        <label for="mpd-due">MPD Due</label>
+    </div>
+
+     <h3>Update By Package:</h3>
+    <div id="sideSticker" class="side-sticker">
+        
+        <div class="sticker-content">
+            <!-- Content of the side sticker -->
+            <!-- Put your form here -->
+            <!-- Package Update Section -->
+            <div class="package-update-section">
+                <h2>Update by Package</h2>
+                <button class="x-button" onclick="closeSticker()" style="position: absolute; top: 10px; right: 10px;"><i class="fa-solid fa-x"></i></button>
+                <p>Update LAST DONE DATE, FH, and FC for all MPD ITEM NUMBERs within a selected package.</p>
+                <form class="ldnd" method="post" action="{% url 'last_done_list' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="package">Select Package:</label>
+                        <select name="package" id="package">
+                            {% for package in packages %}
+                                <option value="{{ package }}">{{ package }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ldd2">Last Done Date:</label>
+                        <input id="ldd2" type="date" name="last_done_date" id="last_done_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ldfh2">Last Done FH:</label>
+                        <input id="ldfh2" type="text" name="last_done_fh" id="last_done_fh" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ldfc2">Last Done FC:</label>
+                        <input id="ldfc2" type="text" name="last_done_fc" id="last_done_fc" required>
+                    </div>
+                    <button class="update-package-button" type="submit" name="update_package">Update</button>
+                </form>
+            </div>
+            <!-- End of the package update section -->
+        </div>
+        
+    </div>
+    <button onclick="toggleSticker()" class="toggle-button">Package Update</button>
+
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>Airline Name</th>
+                <th>Aircraft Name</th>
+                <th>
+                    <div class="grid-container">
+                        <i class="fa-solid fa-sort " id="sort-toggle"></i>
+                    <span>MPD Number</span>
+                    </div>
+                </th>
+                <th><label for="ldd">Last Done Date</label></th>
+                <th><label for="ldfh">Last Done FH</label></th>
+                <th><label for="ldfc">Last Done FC</label></th>
+                <th>Update Last Done</th>
+                <th>Package</th>
+                <th>Airline Next Due by Date</th>
+                <th>Airline Next Due by FH</th>
+                <th>Airline Next Due by FC</th>
+                <th>Airline Due</th>
+                <th>MPD Next Due by Date</th>
+                <th>MPD Next Due by FH</th>
+                <th>MPD Next Due by FC</th>
+                <th>MPD Due</th>
+                <!-- other columns -->
+            </tr>
+        </thead>
+        <tbody>
+            {% if page_obj %}
+            {% for item in page_obj %}
+            <tr>
+                <form class="ldnd" method="post" action="{% url 'last_done_list' %}">
+                    {% csrf_token %}
+                    <td>{{ item.Airline_Name }}</td>
+                    <td>{{ item.Aircraft_Name }}</td>
+                    <td>{{ item.excel_data.MPD_ITEM_NUMBER }}</td>
+                    <td><input id="ldd" type="date" name="last_done_date" value="{{ item.last_done_date|date:'Y-m-d' }}"></td>
+                    <td><input id="ldfh" type="text" name="last_done_fh" value="{{ item.last_done_fh_formatted }}"></td>
+                    <td><input id="ldfc" type="text" name="last_done_fc" value="{{ item.last_done_fc }}"></td>
+                    <input id="ldid" type="hidden" name="last_done_id" value="{{ item.id }}">
+                    <td><button type="submit">Update</button></td>
+                    <td>{{ item.package }}</td>
+                    <td>{{ item.al_nd_date }}</td>
+                    <td>{{ item.al_nd_fh }}</td>
+                    <td>{{ item.al_nd_fc }}</td>
+                    <td>{{ item.al_due }}</td>
+                    <td>{{ item.mpd_nd_date }}</td>
+                    <td>{{ item.mpd_nd_fh }}</td>
+                    <td>{{ item.mpd_nd_fc }}</td>
+                    <td>{{ item.mpd_due }}</td>
+                    <!-- other columns -->
+                </form>
+            </tr>
+            {% endfor %}
+            {%else%}
+            <tr>
+                <td colspan="100%"> No Research Results.</td>
+            </tr>
+            {%endif%}
+        </tbody>
+    </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1&sort={{ sort_by }}&order={{ sort_order }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}&sort={{ sort_by }}&order={{ sort_order }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&sort={{ sort_by }}&order={{ sort_order }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}&sort={{ sort_by }}&order={{ sort_order }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Last</a>
+            {% endif %}
+        </span>
+    </div>
+    {% endif %}
+
+{% endif %}
+
+
+{% include 'parts/footer.html' %}
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/ldnd.js' %}"></script>
+{% endblock %}

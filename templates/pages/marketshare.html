@@ -1,0 +1,341 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Market Share</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/marketshare.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block content%}
+{% include 'parts/header.html' %}
+<div class="container">
+    <div id="service-section">
+        <h1>Market Share</h1>
+    </div>
+    {% if hs_error_message %}
+        <div class="alert alert-danger">
+            {{ ms_error_message }}
+        </div>
+    {% endif %}
+    {% if hs_error_messages %}
+        <div class="alert alert-danger">
+            {% for error in hs_error_messages %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if i_error_message %}
+        <div class="alert alert-danger">
+            {{ i_error_message }}
+        </div>
+    {% endif %}
+    {% if i_error_messages %}
+        <div class="alert alert-danger">
+            {% for error in i_error_messages %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if has_historical_data_form %}
+        <h2>Historical Data</h2>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in has_historical_data_form %}
+                {{ field.label_tag }}
+                {% for choice in field %}
+                <p>
+                    <label>
+                        {% if choice.data.value == 'yes' %}
+                            <input type="radio" name="{{ field.name }}" value="{{ choice.data.value }}" checked>{{ choice.choice_label }}
+                        {% else %}
+                            <input type="radio" name="{{ field.name }}" value="{{ choice.data.value }}">{{ choice.choice_label }}
+                        {% endif %}
+                    </label>
+                </p>
+                {% endfor %}
+        {% endfor %}
+        <div id="hint" style="display:none; color: rgb(255, 56, 56); font-weight: bold; margin:20px 0;">
+            Hint: The model will use an already calculated regression coefficient for the Egyptian market.
+        </div>
+        <div class="button-container">
+            <button type="submit">Next</button>
+        </div>
+    </form>
+
+
+    {% elif hs_excel_form %}
+        <h2>Upload Historical Data File</h2>
+        <form class="excel" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ hs_excel_form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+
+        <div class="back-button-container">
+            <button class="Back-Button" type="button" onclick="window.history.back();">Back</button>
+        </div>
+
+    {% elif hs_column_form %}
+        <h2>Historical Data File Missing Columns</h2>
+        <form class="missing" method="post">
+            {% csrf_token %}
+            {{ hs_column_form.as_p }}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+        </form>
+
+    {% elif i_excel_form %}
+        <h2>Upload Itineraries Data File</h2>
+        <form class="excel" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ i_excel_form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+        <div class="back-button-container">
+            <button class="Back-Button" type="button" onclick="window.history.back();">Back</button>
+        </div>
+
+    {% elif i_column_form %}
+        <h2>Itineraries Data File Missing Columns</h2>
+        <form class="missing" method="post">
+            {% csrf_token %}
+            {{ i_column_form.as_p }}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+        </form>
+
+    {% elif d_excel_form %}
+        <div class="sample">
+            <p>Please download the below file and fill the markets unconstrained demand in the "unconstrained demand" column and re-upload the file in the form below</p>
+                <!-- Initially hide the download link; it will be shown after AJAX success -->
+                <a href="{% url 'download_unconstrained_demand_excel' %}" class="button-link"  id="downloadLink">
+                    <button class="sample-button">Download</button>
+                </a>
+        </div>
+
+
+        <h2>Upload The Edited Unconstrained Data Excel File</h2>
+        <form class="excel" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ d_excel_form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+
+        <div class="back-button-container">
+            <button class="Back-Button" type="button" onclick="window.history.back();">Back</button>
+        </div>
+ 
+    {%endif%}
+
+{% if markets %}
+<form class="choose-market" method="post">
+    <p>
+        <label for="marketSelector">Choose Market:</label>
+        <select id="marketSelector" onchange="showSelectedMarketChart();">
+            <option value="">Ex: CAI-SSH</option>
+            {% for market in markets %}
+            <option value="chart-{{ forloop.counter }}">{{ market.market }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <div class="back-button-container">
+        <button class="Back-Button" type="button" onclick="window.history.back();">Back</button>
+    </div>
+</form>
+
+<!-- Charts hidden by default -->
+{% for market in markets %}
+<div id="chart-{{ forloop.counter }}" class="charts-container" style="display: none;">
+    <div class="chart-container">
+        <div class="market-share-div" id="sharechart-{{ forloop.counter }}"></div>
+        <p>{{ market.competition_level }}</p>
+    </div>
+    <div class="chart-container">
+        <div class="fare-div" id="farechart-{{ forloop.counter }}"></div>
+        <p>{{ market.fare_comments }}</p>
+    </div>
+    <div class="chart-container">
+        <div class="type-div" id="itinerary-type-chart-{{ forloop.counter }}"></div>
+        <p>{{ market.type_comments }}</p>
+    </div>
+    <div class="chart-container">
+        <div class="time-slot-div" id="timechart-{{ forloop.counter }}"></div>
+        <p>{{ market.time_slot_comments }}</p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawCharts{{ forloop.counter }});
+
+    function drawCharts{{ forloop.counter }}() {
+        // Time Slot Distribution Chart
+        var timeSlotData = google.visualization.arrayToDataTable({{ market.time_slot_data|safe }});
+        var timeOptions = {
+            title: 'Time Slot Distribution for {{ market.market }}',
+            backgroundColor: 'transparent',
+            fontSize: '10',
+            titleTextStyle: { color: 'white', bold: true },
+            chartArea: { left: '10%', top: '15%', width: '100%', height: '80%' },
+            legend: {
+                textStyle: {
+                    color: 'white',  // Set the legend text color to white
+                    fontSize: 10     // Optional: you can also set the font size
+                }
+            }
+        };
+        var timeChart = new google.visualization.PieChart(document.getElementById('timechart-{{ forloop.counter }}'));
+        timeChart.draw(timeSlotData, timeOptions);
+
+        // Market Share Chart
+        var marketShareData = google.visualization.arrayToDataTable({{ market.market_share_data|safe }});
+        var shareOptions = {
+            title: 'Market Share for {{ market.market }}',
+            backgroundColor: 'transparent',
+            fontSize: '8',
+            titleTextStyle: { color: 'white', bold: true },
+            chartArea: { left: '10%', top: '15%', width: '100%', height: '80%' },
+            legend: {
+                textStyle: {
+                    color: 'white',  // Set the legend text color to white
+                    fontSize: 10     // Optional: you can also set the font size
+                }
+            }
+        };
+        var shareChart = new google.visualization.PieChart(document.getElementById('sharechart-{{ forloop.counter }}'));
+        shareChart.draw(marketShareData, shareOptions);
+
+        // Itinerary Type Distribution Chart
+        var itineraryTypeData = google.visualization.arrayToDataTable({{ market.itinerary_type_data|safe }});
+        var typeOptions = {
+            title: 'Itinerary Type Distribution for {{ market.market }}',
+            backgroundColor: 'transparent',
+            fontSize: '8',
+            titleTextStyle: { color: 'white', bold: true },
+            chartArea: { left: '10%', top: '15%', width: '100%', height: '80%' },
+            legend: {
+                textStyle: {
+                    color: 'white',  // Set the legend text color to white
+                    fontSize: 10     // Optional: you can also set the font size
+                }
+            }
+        };
+        var typeChart = new google.visualization.PieChart(document.getElementById('itinerary-type-chart-{{ forloop.counter }}'));
+        typeChart.draw(itineraryTypeData, typeOptions);
+
+        // Fare Distribution Chart
+        var dataTable = google.visualization.arrayToDataTable({{ market.fare_data|safe }});
+        var options = {
+            title: 'Fare Distribution',
+            backgroundColor: 'transparent',
+            fontSize: '8',
+            titleTextStyle: { color: 'white', bold: true },
+            chartArea: { left: '10%', top: '15%', width: '80%', height: '75%' },
+            colors: ['#BFFF00'],
+            hAxis: {
+                textStyle: {
+                    color: 'white'  // Set the x-axis labels to white
+                }
+            },
+            vAxis: {
+                textStyle: {
+                    color: 'white'  // Optionally set the y-axis labels to white as well
+                }
+            },
+            legend: {
+                textStyle: {
+                    color: 'white',  // Set the legend text color to white
+                    fontSize: 10     // Optional: you can also set the font size
+                }
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('farechart-{{ forloop.counter }}'));
+        chart.draw(dataTable, options);
+    }
+</script>
+{% endfor %}
+{% endif %}
+</div>
+
+    {% if HHI %}
+
+        <h2 class="market-h2">Market Share Results</h2>
+
+        
+        <div class="button-group">
+            <button onclick="toggleTable('betas')">Regression Coefficients</button>
+            <button onclick="toggleTable('demand')">Demand</button>
+            <button onclick="toggleTable('qsi')">QSI</button>
+            <button onclick="toggleTable('hhi')">HHI</button>
+        </div>
+
+        <div id="betas" class="hidden">
+            <div class="betas-table">
+                {{ historical_market_betas_df | safe }}
+            </div>
+            {% if excel_file_url %}
+                <div class="button-container">
+                    <a href="{% url 'download_MS_results_excel' %}" class="button-link">
+                        <button class="download-report">Download Excel Report</button>
+                    </a>
+                    <button class="download-report" onclick="window.location='{% url 'recommendations' %}';">More Information</button>
+                </div>
+            {% endif %}
+
+        </div>
+        <div id="demand" class="hidden">
+            <div class="demand-table">
+                {{ Itineraries_Demand | safe }}
+            </div>
+            {% if excel_file_url %}
+            <div class="button-container">
+                <a href="{% url 'download_MS_results_excel' %}" class="button-link">
+                    <button class="download-report">Download Excel Report</button>
+                </a>
+                <button class="download-report" onclick="window.location='{% url 'recommendations' %}';">More Information</button>
+            </div>
+        {% endif %}
+        </div>
+        <div id="hhi" class="hidden">
+            <div class="hhi-table">
+                {{ HHI | safe }}
+            </div>
+            {% if excel_file_url %}
+            <div class="button-container">
+                <a href="{% url 'download_MS_results_excel' %}" class="button-link">
+                    <button class="download-report">Download Excel Report</button>
+                </a>
+                <button class="download-report" onclick="window.location='{% url 'recommendations' %}';">More Information</button>
+            </div>
+        {% endif %}
+        </div>
+        <div id="qsi" class="hidden">
+            <div class="qsi-table">
+                {{ QSI | safe }}
+            </div>
+            {% if excel_file_url %}
+            <div class="button-container">
+                <a href="{% url 'download_MS_results_excel' %}" class="button-link">
+                    <button class="download-report">Download Excel Report</button>
+                </a>
+                <button class="download-report" onclick="window.location='{% url 'recommendations' %}';">More Information</button>
+            </div>
+        {% endif %}
+        </div>
+
+    {% endif %}
+
+
+   
+    
+    <div class="button-container2">
+        <a href="/airlineoperations/marketshare" class="ctaa">Another Trial</a>
+        <a href="/documentation/#marketshare" class="ctaa" target="_blank">User Manual</a>
+    </div>
+
+
+
+{%include 'parts/footer.html'%}
+{%block script%}<script src="{% static 'js/marketshare.js' %}"></script>{%endblock%}
+{%endblock%}

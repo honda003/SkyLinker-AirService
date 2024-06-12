@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title%}<title>Itinerary Builder</title>{%endblock%}
+{%block stylesheet%}<link href="{% static 'css/itinerarybuilder.css' %}" rel="stylesheet" type="text/css">{%endblock%}
+{%block jquery%}<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>{%endblock%}
+{%block content%}
+{%include 'parts/header.html'%}
+<div class="container">
+    <div id="service-section">
+        <h1>Itinerary Builder</h1>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% if error_message %}
+        <div class="alert alert-danger">
+            {{ error_message }}
+        </div>
+    {% endif %}
+
+    {% if error_messages %}
+        <div class="alert alert-danger">
+            {% for error in error_messages %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if excel_form %}
+        <h2>Upload Flights File</h2>
+        <form class="excel" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ excel_form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+
+        <div class="sample">
+            <p>Please ensure all the columns in the Excel file are correctly filled as per the sample format below.</p>
+            <button class="sample-button" id="previewButton" type="button">Sample</button>
+            <div style="display: none;" id="sampleContainer">
+                <h2>Sample Flight Data</h2>
+                <div id="sampleFlightData">
+                    <!-- Table will be loaded here via AJAX -->
+                </div>
+                <!-- Initially hide the download link; it will be shown after AJAX success -->
+                <a href="{% url 'download_IB_flights_sample_excel' %}" class="button-link" style="display: none;" id="downloadLink">
+                    <button class="sample-button">Download</button>
+                </a>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                // Flag to check if data has been loaded
+                var dataLoaded = false;
+            
+                $("#previewButton").click(function() {
+                    // Check if data is already loaded
+                    if (!dataLoaded) {
+                        // Perform AJAX request to fetch data
+                        $.ajax({
+                            url: '{% url "preview_IB_flights_sample" %}',
+                            type: 'get',
+                            success: function(response) {
+                                // Display the fetched HTML table in the div
+                                $('#sampleFlightData').html(response.html_table);
+                                // Data has been successfully loaded
+                                dataLoaded = true;
+                                // Show the download link
+                                $('#downloadLink').show();
+                                // Show the sample data container with a fade in animation
+                                $("#sampleContainer").fadeIn("slow");
+                            },
+                            error: function() {
+                                // Display an error message if the data fetch fails
+                                $('#sampleFlightData').html('<p>No data available to display.</p>');
+                                // Data loading attempt failed, can try again
+                                dataLoaded = false;
+                                // Ensure the download link remains hidden if there's an error
+                                $('#downloadLink').hide();
+                                // Show the error message with a fade in animation
+                                $("#sampleContainer").fadeIn("slow");
+                            }
+                        });
+                    } else {
+                        // Toggle the visibility of the sample container with a fade animation
+                        $("#sampleContainer").fadeToggle("slow");
+                    }
+                });
+            });
+        </script>
+
+    {% elif column_form %}
+        <h2>Missing Columns.</h2>
+        <form class="missing" method="post">
+            {% csrf_token %}
+            {{ column_form.as_p }}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+        </form>
+    {% elif airport_excel_form %}
+        <h2>Upload Airport File</h2>
+        <form class="excel" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ airport_excel_form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+
+        <div class="sample">
+            <p>Please ensure all the columns in the Excel file are correctly filled as per the sample format below.</p>
+            <button class="sample-button" id="previewButton" type="button">Sample</button>
+            <div style="display: none;" id="sampleContainer">
+                <h2>Sample Airports Data</h2>
+                <div id="sampleFlightData">
+                    <!-- Table will be loaded here via AJAX -->
+                </div>
+                <!-- Initially hide the download link; it will be shown after AJAX success -->
+                <a href="{% url 'download_airports_sample_excel' %}" class="button-link" style="display: none;" id="downloadLink">
+                    <button class="sample-button">Download</button>
+                </a>
+            </div>
+        </div>
+
+
+        <script>
+            $(document).ready(function() {
+                // Flag to check if data has been loaded
+                var dataLoaded = false;
+            
+                $("#previewButton").click(function() {
+                    // Check if data is already loaded
+                    if (!dataLoaded) {
+                        // Perform AJAX request to fetch data
+                        $.ajax({
+                            url: '{% url "preview_airports_sample" %}',
+                            type: 'get',
+                            success: function(response) {
+                                // Display the fetched HTML table in the div
+                                $('#sampleFlightData').html(response.html_table);
+                                // Data has been successfully loaded
+                                dataLoaded = true;
+                                // Show the download link
+                                $('#downloadLink').show();
+                                // Show the sample data container with a fade in animation
+                                $("#sampleContainer").fadeIn("slow");
+                            },
+                            error: function() {
+                                // Display an error message if the data fetch fails
+                                $('#sampleFlightData').html('<p>No data available to display.</p>');
+                                // Data loading attempt failed, can try again
+                                dataLoaded = false;
+                                // Ensure the download link remains hidden if there's an error
+                                $('#downloadLink').hide();
+                                // Show the error message with a fade in animation
+                                $("#sampleContainer").fadeIn("slow");
+                            }
+                        });
+                    } else {
+                        // Toggle the visibility of the sample container with a fade animation
+                        $("#sampleContainer").fadeToggle("slow");
+                    }
+                });
+            });
+        </script>
+
+    {% elif airport_column_form %}
+        <h2>Airport Missing Columns.</h2>
+        <form class="missing" method="post">
+            {% csrf_token %}
+            {{ airport_column_form.as_p }}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Next</button>
+            </div>
+        </form>
+    {% elif turn_around_form and connection_time_form and distance_ratio_form%}
+        <h2>Turn Around Time, Connection Time and distance ratio.</h2>
+        <form class="tat" method="post">
+            {% csrf_token %}
+            {{ turn_around_form.as_p }}
+            {{ connection_time_form.as_p }}
+            {{ distance_ratio_form.as_p }}
+            <div class="button-container">
+                <button type="button" onclick="window.history.back();">Back</button>
+                <button type="submit">Get Itineraries</button>
+            </div>
+        </form>
+    {% endif %}
+</div>
+    {% if show_flights %}
+        {% if flights_df %}
+
+            <div class="ns-table">
+                <h2>Non-Stop Results</h2>
+                {{ flights_df | safe }}
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if show_ss_results %}
+        {% if ss_itin_df %}
+        <div class="ss-table">
+            <h2>Single Stop Results</h2>
+            {{ ss_itin_df | safe }}
+        </div>
+        {% endif %}
+    {% endif %}
+    {% if show_ds_results %}
+        {% if ds_itin_df %}
+            <div class="ds-table">
+                <h2>Double Stop Results</h2>
+                {{ ds_itin_df | safe }}
+            </div>
+        {% endif %}
+    {% endif %}
+
+
+    <div class="button-container">
+
+        {% if excel_file_url_1 %}
+            <a href="{% url 'download_IB_results_excel' %}" class="button-link">
+                <button class="download-report">Download Excel Report</button>
+            </a>
+        {% endif %}
+
+
+        {% if excel_file_url_2 %}
+            <a href="{% url 'download_req_format_excel' %}" class="button-link">
+                <button class="download-report">Download Modules Input</button>
+            </a>
+        {% endif %}
+    </div>
+
+    
+
+    <div class="button-container2">
+        <a href="/airlineoperations/itinerarybuilder" class="ctaa">Another Trial</a>
+        <a href="/documentation/#itinerary-builder" class="ctaa" target="_blank">User Manual</a>
+    </div>
+
+{%include 'parts/footer.html' %}
+{%endblock%}
