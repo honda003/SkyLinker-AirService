@@ -1,156 +1,204 @@
-<p align="center">
-  <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1200&q=80" alt="SkyLinker AirService" width="800"/>
-</p>
+# ✈️ SkyLinker – Airline Operations & Maintenance Intelligence  
 
-<p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge"></a>
-  <a href="#"><img src="https://img.shields.io/badge/Built%20with-Python%20%26%20Django-blue?style=for-the-badge&logo=python"></a>
-  <a href="#"><img src="https://img.shields.io/badge/License-Academic-orange?style=for-the-badge"></a>
-</p>
+<div align="center">
 
-# 🌍 SkyLinker AirService ✈️
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![Celery](https://img.shields.io/badge/Celery-37814A?style=for-the-badge&logo=celery&logoColor=white)](https://docs.celeryq.dev/)
 
-**Optimizing Airline Schedules & Maintenance Management with Data-Driven Intelligence**
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
+[![jQuery](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)](https://jquery.com/)
 
----
+[![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)](https://numpy.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![Pyomo](https://img.shields.io/badge/Pyomo-4B8BBE?style=for-the-badge&logo=python&logoColor=white)](http://www.pyomo.org/)
 
-## 📌 Overview
+</div>
 
-SkyLinker AirService is an **integrated decision-support software** that unifies **airline schedule optimization** and **aircraft maintenance management**.  
-Developed as a Cairo University Aeronautical Engineering graduation project (Spring 2024), it empowers airlines to **maximize profitability, ensure safety, and streamline operations**.
 
-<p align="center">
-  <img src="https://images.unsplash.com/photo-1581091870622-7c14cba4f914?auto=format&fit=crop&w=1000&q=80" alt="Airline Dashboard" width="80%">
-</p>
 
 ---
 
-## 🚀 Applications
+## 🌍 **Project Overview**  
 
-### 1. ✈️ Itinerary Builder
-* **Generates:** Non-stop, single-stop, and double-stop itineraries.  
-* **Importance:** Enables competitive, passenger-friendly scheduling.  
+<div align="center">
 
-<p align="center">
-  <img src="https://cdn-icons-png.flaticon.com/512/4442/4442748.png" alt="Itinerary Icon" width="120"/>
-</p>
+**🔥 A complete airline decision-support system 🔥**  
+*🚀 Unifying **schedule optimization**, **fleet assignment**, **aircraft routing**, and **predictive maintenance** into one powerful platform.*  
 
----
+</div>  
 
-### 2. 📊 Market Share Analysis
-* **Generates:** Demand forecasts, competitor shares, and HHI index.  
-* **Importance:** Provides airlines with **strategic insights** on market entry/expansion.  
+SkyLinker was developed as a **Cairo University Aeronautical Engineering graduation project (2024)** to help airlines:  
 
-<p align="center">
-  <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Market Analysis Icon" width="120"/>
-</p>
+- 📈 **Maximize profitability** through optimized schedules  
+- 🔧 **Ensure safety** via predictive maintenance  
+- 🛫 **Enhance efficiency** with data-driven fleet operations  
 
 ---
 
-### 3. 🛫 Fleet Assignment (FAM / IFAM / ISD-IFAM)
-* **Generates:** Optimal fleet allocation with profit/cost outputs.  
-* **Importance:** Ensures **resource efficiency & maximum revenue**.  
+## 📈 **Business Impact** 💼  
 
-<p align="center">
-  <img src="https://cdn-icons-png.flaticon.com/512/3141/3141158.png" alt="Fleet Assignment Icon" width="120"/>
-</p>
+### 🎯 **Key Benefits for Airlines**
+- **⚡ Operational Efficiency**: Optimize itineraries, aircraft assignments, and turnaround times.  
+- **🛡️ Safety Compliance**: Automate maintenance programs, LDND tracking, and AMP packaging.  
+- **💰 Profitability Boost**: Forecast demand, analyze market share, and allocate fleets for maximum return.  
+- **🔮 Predictive Maintenance**: Stay ahead of due tasks with automatic alerts and email notifications.  
 
----
+### 👥 **Target Users** 🎯  
+<div align="left">
 
-### 4. 🔄 Aircraft Routing
-* **Generates:** Daily rotation plans integrating turnaround times & maintenance.  
-* **Importance:** Guarantees **smooth, feasible operations**.  
+✈️ **Airline Operators & Planners**  
+🛠️ **Maintenance Engineers & Technicians**  
+📊 **Aviation Analysts & Consultants**  
+🏛️ **Civil Aviation Authorities**  
 
-<p align="center">
-  <img src="https://cdn-icons-png.flaticon.com/512/3079/3079259.png" alt="Routing Icon" width="120"/>
-</p>
-
----
-
-### 5. 🛠️ Operator & Aircraft Data Pages
-* **Centralizes:** Airline, aircraft, and engine details.  
-* **Importance:** Forms the **foundation for all maintenance modules**.  
-
-<p align="center">
-  <img src="https://cdn-icons-png.flaticon.com/512/3069/3069186.png" alt="Aircraft Data Icon" width="120"/>
-</p>
+</div>
 
 ---
 
-### 6. 📂 Admin Panel – AMP (Approved Maintenance Program)
-* **Generates:** Structured, packaged MPD tasks.  
-* **Importance:** Automates compliance, reducing human error.  
+## 🚀 **Applications**  
 
-<p align="center">
-  <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="AMP Icon" width="120"/>
-</p>
+### ✈️ **Itinerary Builder**
+- 📝 Generates **non-stop, single-stop, and double-stop** itineraries  
+- 🎯 Helps airlines design competitive routes  
 
----
+### 📊 **Market Share Analysis**
+- 📈 Forecasts demand, competitor shares, and HHI index  
+- 🔍 Strategic tool for market entry and expansion  
 
-### 7. ⏳ LDND (Last-Done Next-Due)
-* **Calculates:** Next due dates by flight hours, cycles, and dates.  
-* **Importance:** Ensures **safe, timely maintenance**.  
+### 🛫 **Fleet Assignment (FAM / IFAM / ISD-IFAM)**
+- ⚙️ Assigns aircraft optimally with profit/cost outputs  
+- 💰 Ensures efficient resource allocation  
 
-<p align="center">
-  <img src="https://cdn-icons-png.flaticon.com/512/4781/4781517.png" alt="LDND Icon" width="120"/>
-</p>
+### 🔄 **Aircraft Routing**
+- 📅 Builds feasible daily rotations with turnaround times & maintenance slots  
+- 🚦 Guarantees smooth operations  
 
----
-
-### 8. 📅 Upcoming Tasks & Mailing System
-* **Generates:** Forecasts for future maintenance + automated email alerts.  
-* **Importance:** Keeps operators **ahead of deadlines**, preventing costly delays.  
-
-<p align="center">
-  <img src="https://cdn-icons-png.flaticon.com/512/3176/3176363.png" alt="Upcoming Tasks Icon" width="120"/>
-</p>
+### 🛠️ **Maintenance Management Modules**
+- **AMP (Approved Maintenance Program)** → packages MPD tasks for compliance  
+- **LDND (Last Done – Next Due)** → calculates next due tasks  
+- **Upcoming Tasks & Alerts** → forecasts future checks + automated email alerts  
 
 ---
 
-## 🛠️ Tech Stack
-
-* **Backend**: Python + Django  
-* **Frontend**: Web-based UI (HTML, CSS, JS, jQuery)
-* **Database**: Structured relational data  
-* **Models**: Regression, Poisson forecasting, fleet optimization solvers  
-* **Cloud**: Hosted on EC2
-
----
-
-## 📂 Workflow
+## 📊 Workflow  
 
 ```mermaid
 graph TD;
-    A[Flight Schedule + Data] --> B(Itinerary Builder);
-    B --> C(Market Share Analysis);
+    A[Schedule Data] --> B(Itinerary Builder);
+    B --> C(Market Share);
     C --> D(Fleet Assignment);
     D --> E(Aircraft Routing);
-    F[MPD + AMP + Last Done Data] --> G(AMP Packaging);
-    G --> H(LDND);
-    H --> I(Upcoming Tasks + Alerts);
+    F[MPD + AMP + LDND] --> G(AMP Packaging);
+    G --> H(LDND Tracking);
+    H --> I(Upcoming Tasks & Alerts);
+
 ```
 ---
 
-## 👨‍💻 Authors
+## 🎛️ **Dashboards & Interfaces**  
 
-Developed by **Cairo University Aeronautical Engineering Students (Class of 2024)**:
+<div align="center">
+<img src="https://media.giphy.com/media/hpXdHPfFI5wTABdDx9/giphy.gif" width="400"/>
+</div>
 
-* Sara Ehab Eshak Azmi
-* Mariam Hesham Mostafa Khalil
-* Mohannad Hossam Hosny Hammad
-* Eslam Mahmoud Hanafy Mahmoud
-* Abdullah Mohamed Abdullah Kamel
 
-**Supervised by:** Dr. Mohamed Lotfy Taha Hassan
+### **🌐 Web Interface**
+- Django-based responsive interface for planners & engineers  
+- Easy navigation across scheduling and maintenance modules  
+
+### **📊 Analytical Dashboards**
+- **Demand Forecasting & Market Share** → visualize route demand & competitor analysis  
+- **Fleet Assignment Outputs** → compare profit, utilization, and efficiency across scenarios  
+- **Aircraft Routing** → daily aircraft rotation with maintenance slot integration  
+
+### **🛠️ Maintenance Control Panels**
+- **AMP Packaging** → centralized MPD → AMP conversion  
+- **LDND Tracking** → automatic updates of last-done / next-due tasks  
+- **Upcoming Tasks & Alerts** → proactive notifications with email integration  
 
 ---
 
-## 📜 License
+## 🚀 **Key Technical Challenges & Solutions** 💪  
 
-This project is an **academic graduation project**. For research and educational use only.
+<div align="center">
+<img src="https://media.giphy.com/media/zOvBKUUEERdNm/giphy.gif" width="350"/>
+</div>
+
+### **⚡ Performance Optimization**  
+- Designed efficient fleet optimization solvers for large-scale route data  
+- Integrated **Poisson forecasting & regression** for demand prediction  
+
+### **🛡️ Reliability Engineering**  
+- Guaranteed **seamless integration** between modules, ensuring that the output of each optimization stage (e.g., itinerary → market share → fleet assignment → routing → maintenance) is **validated, consistent, and immediately usable** as the input for the next module.  
+- Ensured database consistency and integrity for maintenance records  
+
+### **📈 System Scalability**  
+- Built modular applications (Scheduling + Maintenance as independent apps)  
+- Cloud-ready with **Docker** for deployment in scalable environments  
 
 ---
 
-<p align="center">
-  <b>✈️ SkyLinker: Linking skies with intelligence and safety. ✈️</b>
-</p>
+## 🔮 Future Work  
+
+To further enhance SkyLinker AirService and extend its real-world applicability, the following modules are planned for future development:  
+
+- **🎟️ Ticket Pricing Module**  
+  - Dynamic pricing strategies based on demand forecasting, competition analysis, and seasonal variations.  
+  - Helps maximize revenue while maintaining passenger satisfaction.  
+
+- **👨‍✈️ Crew Assignment Module**  
+  - Optimal allocation of pilots and cabin crew considering duty time limitations, legal regulations, and cost efficiency.  
+  - Ensures both **safety compliance** and **efficient workforce utilization**.  
+
+- **⛽ Fuel Optimization Module**  
+  - Intelligent planning to minimize fuel consumption across routes and aircraft types.  
+  - Contributes to **cost reduction** and **environmental sustainability** by lowering emissions.  
+
+---
+
+
+## 👨‍💻 **Project Team** 🏆  
+
+🎓 Cairo University – Aeronautical Engineering (Class of 2024) 
+
+<div align="center">
+
+| 👤 **Team Member** | 🛠️ **Role** | 🔗 **LinkedIn Profile** |
+|-------------------|-------------|------------------------|
+| **🎨 Sara Ehab Eshak Azmi** | Frontend Developer | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sarah-azmi-505b58297/) |
+| **⚙️ Mariam Hesham Mostafa Khalil** | Backend Developer | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mariam-hesham-8808571b3/) |
+| **🔀 Mohaned Hossam Hosny Hammad** | Fullstack Developer | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ho03/) |
+| **⚙️ Eslam Mahmoud Hanafy Mahmoud** | Backend Developer | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/eslammahmoud01/) |
+| **🧪 Abdullah Mohamed Abdullah Kamel** | Testing & QA | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/abdullah-kamel20/) |
+</div>
+
+### 🙌 Special Thanks  
+<div align="center">
+    
+| 👤 **Contributor** | 🛠️ **Role** | 🔗 **LinkedIn Profile** |
+|-------------------|-------------|------------------------|
+| **🎓 Dr. Mohamed Lotfy Taha Hassan** | Project Supervisor & Guider | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohamed-lotfy-taha-hassan-ph-d-730b4619/) |
+| **💡 Eng. Hesham Ahmed** | Project Mentor & Technical Support | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hesham-ahmed-a9032b31a/) |
+
+</div>
+
+🤝 *Teamwork makes the dream work!* ✨  
+
+</div>
+
+---
+
+## 📜 **License**  
+
+This project is an **academic graduation project**.  
+For research and educational use only.  
+
+---
+
+<div align="center">
+
+**✈️ SkyLinker – Linking Skies with Intelligence and Safety 🌍**  
