@@ -120,9 +120,9 @@ graph TD;
 - **LDND Tracking** → automatic updates of last-done / next-due tasks  
 - **Upcoming Tasks & Alerts** → proactive notifications with email integration
   
-## Documentation
-You can view the full website manual here:  
-[➡️ Open the PDF](media/SkyLinker Manual- FinalV.pdf)
+### Documentation
+- You can view the full website manual here:  
+- [➡️ Open the PDF](media/SkyLinker Manual- FinalV.pdf)
 ---
 
 ## 🚀 **Key Technical Challenges & Solutions** 💪  
