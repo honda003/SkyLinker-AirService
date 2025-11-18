@@ -118,8 +118,11 @@ graph TD;
 ### **🛠️ Maintenance Control Panels**
 - **AMP Packaging** → centralized MPD → AMP conversion  
 - **LDND Tracking** → automatic updates of last-done / next-due tasks  
-- **Upcoming Tasks & Alerts** → proactive notifications with email integration  
-
+- **Upcoming Tasks & Alerts** → proactive notifications with email integration
+  
+## Documentation
+You can view the full website manual here:  
+[➡️ Open the PDF](media/SkyLinker Manual- FinalV.pdf)
 ---
 
 ## 🚀 **Key Technical Challenges & Solutions** 💪  
